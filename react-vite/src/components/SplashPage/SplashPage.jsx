@@ -1,12 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { thunkLogin } from '../../redux/session';
+import LoginFormModal from '../LoginFormModal';
+import SignupFormModal from '../SignupFormModal';
+import { useModal } from '../../context/Modal';
 import './SplashPage.css';
 
 const SplashPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { setModalContent, closeModal } = useModal();
   const isAuthenticated = useSelector((state) => state.session.isAuthenticated);
 
   const handleDemoLogin = () => {
@@ -16,20 +19,28 @@ const SplashPage = () => {
       });
   };
 
+  const openLoginModal = () => {
+    setModalContent(<LoginFormModal onClose={closeModal} />);
+  };
+
+  const openSignupModal = () => {
+    setModalContent(<SignupFormModal onClose={closeModal} />);
+  };
+
   if (isAuthenticated) {
     return <Navigate to="/dashboard" />;
   }
 
   return (
     <div className="splash-container">
+      <img src="/logo.png" alt="BoundTogether Logo" className="logo" />
       <div className="header">
-        <img src="/logo.png" alt="BoundTogether Logo" className="logo" /> {/* Logo reference */}
         <h2>&quot;Start trading books today!&quot;</h2>
       </div>
       <div className="buttons">
-        <button onClick={() => navigate('/signup')} className="btn">Sign Up</button>
-        <button onClick={() => navigate('/login')} className="btn">Log In</button>
-        <button onClick={handleDemoLogin} className="btn demo-btn">
+        <button onClick={openSignupModal} className="btn" type="button">Sign Up</button>
+        <button onClick={openLoginModal} className="btn" type="button">Log In</button>
+        <button onClick={handleDemoLogin} className="btn demo-btn" type="button">
           Log In as Demo User
         </button>
       </div>

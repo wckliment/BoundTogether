@@ -7,15 +7,21 @@
     padding: 20px;
     background-color: #f9f9f9;
     text-align: center;
+    position: relative;
+    /* Allows absolute positioning inside */
+}
+
+.logo {
+    position: absolute;
+    top: 0px;
+    /* Distance from the top */
+    right: 0px;
+    /* Distance from the right */
+    max-width: 225px;
 }
 
 .header {
     margin-bottom: 20px;
-}
-
-.logo {
-    max-width: 150px;
-    margin-bottom: 10px;
 }
 
 .buttons {

@@ -10,6 +10,7 @@ function OpenModalButton({
 
   const onClick = () => {
     if (onModalClose) setOnModalClose(onModalClose);
+    console.log("Opening modal with component:", modalComponent);
     setModalContent(modalComponent);
     if (typeof onButtonClick === "function") onButtonClick();
   };
