@@ -1,11 +1,12 @@
 .splash-container {
+    font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #2B2B2B;
     text-align: center;
     position: relative;
     /* Allows absolute positioning inside */
@@ -14,20 +15,27 @@
 .logo {
     position: absolute;
     top: 0px;
-    /* Distance from the top */
     right: 0px;
-    /* Distance from the right */
     max-width: 225px;
 }
 
+.header h2 {
+    color: #F5F5F5;
+    font-size: 36px;
+    /* Apply White Smoke to the "Start trading books today!" text */
+}
+
 .header {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    margin-top: -120px;
+    font-weight: 600;
+    /* Adjust the weight to your preference */
 }
 
 .buttons {
     display: flex;
     gap: 10px;
-    margin-top: 20px;
+    margin-top: 175px;
 }
 
 .btn {
@@ -36,17 +44,23 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #007bff;
+    background-color: rgb(200, 120, 224);
     color: white;
+    font-weight: 500;
+    /* Adjust button font weight */
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #007bff;
 }
 
 .description {
-    margin-top: 30px;
+    margin-top: 80px;
     font-size: 18px;
     max-width: 600px;
     color: #333;
+    font-weight: 300;
+    color: #F5F5F5;
+    font-style: italic;
+    /* Light font weight for description */
 }

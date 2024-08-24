@@ -30,13 +30,11 @@ function LoginFormModal() {
     }
   };
 
-const handleOverlayClick = (e) => {
-  console.log("Overlay clicked"); // Add this log
-  if (modalRef.current && !modalRef.current.contains(e.target)) {
-    console.log("Click is outside modal, closing modal...");
-    closeModal();
-  }
-};
+  const handleOverlayClick = (e) => {
+    if (modalRef.current && !modalRef.current.contains(e.target)) {
+      closeModal();
+    }
+  };
 
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
@@ -44,27 +42,27 @@ const handleOverlayClick = (e) => {
         <button className="close-button" onClick={closeModal}>X</button>
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
-          <label>
-            Email
+          <div className="form-group">
+            <label>Email</label>
             <input
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-          </label>
-          {errors.email && <p>{errors.email}</p>}
-          <label>
-            Password
+            {errors.email && <p className="error">{errors.email}</p>}
+          </div>
+          <div className="form-group">
+            <label>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-          </label>
-          {errors.password && <p>{errors.password}</p>}
-          <button type="submit">Log In</button>
+            {errors.password && <p className="error">{errors.password}</p>}
+          </div>
+          <button type="submit" className="submit-button">Log In</button>
         </form>
       </div>
     </div>
