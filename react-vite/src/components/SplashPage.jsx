@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom'; // Import useNavigate
 import { thunkLogin } from '../../redux/session';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -9,20 +9,16 @@ import './SplashPage.css';
 
 const SplashPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();  // useNavigate hook
+  const navigate = useNavigate(); // Initialize useNavigate for navigation
   const { setModalContent, closeModal } = useModal();
   const isAuthenticated = useSelector((state) => state.session.isAuthenticated);
 
-const handleDemoLogin = () => {
-  dispatch(thunkLogin({ email: 'demo@demo.io', password: 'password' }))
-    .then(() => {
-      console.log("Login successful, navigating to /library");
-      navigate('/library');  // Navigate to the library page after login
-    })
-    .catch((error) => {
-      console.error("Error during login:", error);
-    });
-};
+  const handleDemoLogin = () => {
+    dispatch(thunkLogin({ email: 'demo@demo.io', password: 'password' }))
+      .then(() => {
+        navigate('/library'); // Redirect to Personal Library after logging in
+      });
+  };
 
   const openLoginModal = () => {
     setModalContent(<LoginFormModal onClose={closeModal} />);
@@ -32,6 +28,7 @@ const handleDemoLogin = () => {
     setModalContent(<SignupFormModal onClose={closeModal} />);
   };
 
+  // Redirect to the Personal Library page if the user is already authenticated
   if (isAuthenticated) {
     return <Navigate to="/library" />;
   }
