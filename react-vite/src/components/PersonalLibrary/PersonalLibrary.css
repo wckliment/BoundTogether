@@ -1,5 +1,13 @@
+.personal-library-layout {
+    display: flex;
+}
+
 .personal-library-container {
+    margin-left: 220px;
+    /* Adjust according to the width of the left nav */
     padding: 20px;
+    width: calc(100% - 220px);
+    /* Adjust according to the width of the left nav */
 }
 
 .add-book-button {

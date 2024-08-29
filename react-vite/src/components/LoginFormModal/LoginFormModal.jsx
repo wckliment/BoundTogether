@@ -29,7 +29,7 @@ function LoginFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
-      navigate('/library'); // Navigate to the library page after successful login
+      navigate('/library'); 
     }
   };
 
