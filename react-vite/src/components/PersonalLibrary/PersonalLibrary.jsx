@@ -16,8 +16,10 @@ const PersonalLibrary = () => {
     <div className="personal-library-layout">
       <LeftNav />
       <div className="personal-library-container">
-        <h1>My Personal Library</h1>
-        <button className="add-book-button">Add Book</button>
+        <div className="header-container">
+          <h1>My Personal Library</h1>
+          <button className="add-book-button">Add Book</button>
+        </div>
         <div className="books-list">
           {books.map((book) => (
             <div key={book.id} className="book-tile">
