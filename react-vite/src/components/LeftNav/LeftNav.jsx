@@ -37,8 +37,8 @@ const LeftNav = () => {
         </button>
         {showUserInfo && (
           <div className="user-info">
-            <p>{user?.username}</p>
-            <p>{user?.email}</p>
+            <div className="user-name">{user?.username}</div>
+            <div className="user-email">{user?.email}</div>
           </div>
         )}
       </div>
