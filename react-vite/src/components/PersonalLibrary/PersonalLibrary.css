@@ -43,14 +43,27 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
+    max-width: 250px;
+    /* Consistent width */
+    height: 450px;
+    /* Fixed height for uniformity */
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .book-image {
     max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    /* Limit height for uniformity */
     border-radius: 8px;
     margin-bottom: 15px;
+    object-fit: contain;
+    /* Ensure image fits without stretching */
+    flex-grow: 1;
+    /* Allow the image to grow within the available space */
 }
 
 .book-details {
@@ -60,6 +73,8 @@
 .book-actions {
     display: flex;
     justify-content: space-between;
+    margin-top: auto;
+    /* Ensure actions are aligned at the bottom */
 }
 
 .edit-button,
