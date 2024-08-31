@@ -11,15 +11,21 @@ const removeUser = () => ({
 });
 
 export const thunkAuthenticate = () => async (dispatch) => {
-	const response = await fetch("/api/auth/");
-	if (response.ok) {
-		const data = await response.json();
-		if (data.errors) {
-			return;
-		}
+  const response = await fetch("/api/auth/");
+  console.log("Authenticate Response:", response);
 
-		dispatch(setUser(data));
-	}
+  if (response.ok) {
+    const data = await response.json();
+    console.log("Authenticated User Data:", data);
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(setUser(data));
+  } else {
+    const error = await response.json();
+    console.error("Authentication Error:", error);
+  }
 };
 
 export const thunkLogin = (credentials) => async dispatch => {
@@ -29,14 +35,19 @@ export const thunkLogin = (credentials) => async dispatch => {
     body: JSON.stringify(credentials)
   });
 
+  console.log("Login Response:", response);
+
   if(response.ok) {
     const data = await response.json();
+    console.log("User Data on Login:", data);
     dispatch(setUser(data));
   } else if (response.status < 500) {
     const errorMessages = await response.json();
-    return errorMessages
+    console.error("Login Error Messages:", errorMessages);
+    return errorMessages;
   } else {
-    return { server: "Something went wrong. Please try again" }
+    console.error("Server Error during Login");
+    return { server: "Something went wrong. Please try again" };
   }
 };
 
@@ -47,20 +58,32 @@ export const thunkSignup = (user) => async (dispatch) => {
     body: JSON.stringify(user)
   });
 
+  console.log("Signup Response:", response);
+
   if(response.ok) {
     const data = await response.json();
+    console.log("User Data on Signup:", data);
     dispatch(setUser(data));
   } else if (response.status < 500) {
     const errorMessages = await response.json();
-    return errorMessages
+    console.error("Signup Error Messages:", errorMessages);
+    return errorMessages;
   } else {
-    return { server: "Something went wrong. Please try again" }
+    console.error("Server Error during Signup");
+    return { server: "Something went wrong. Please try again" };
   }
 };
 
 export const thunkLogout = () => async (dispatch) => {
-  await fetch("/api/auth/logout");
-  dispatch(removeUser());
+  const response = await fetch("/api/auth/logout");
+  console.log("Logout Response:", response);
+
+  if (response.ok) {
+    dispatch(removeUser());
+    console.log("User logged out successfully");
+  } else {
+    console.error("Error during Logout");
+  }
 };
 
 const initialState = { user: null };
