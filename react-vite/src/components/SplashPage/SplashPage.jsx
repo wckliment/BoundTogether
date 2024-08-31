@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';  // Importing useNavigate and Navigate
 import { thunkLogin } from '../../redux/session';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -13,16 +13,19 @@ const SplashPage = () => {
   const { setModalContent, closeModal } = useModal();
   const isAuthenticated = useSelector((state) => state.session.isAuthenticated);
 
-const handleDemoLogin = () => {
-  dispatch(thunkLogin({ email: 'demo@demo.io', password: 'password' }))
-    .then(() => {
-      console.log("Login successful, navigating to /library");
-      navigate('/library');  // Navigate to the library page after login
-    })
-    .catch((error) => {
-      console.error("Error during login:", error);
-    });
-};
+  const handleDemoLogin = async () => {
+    const credentials = { email: 'demo@aa.io', password: 'password' };
+    console.log("Attempting to log in as Demo User with credentials:", credentials);
+
+    const errorMessages = await dispatch(thunkLogin(credentials));
+
+    if (!errorMessages) {  // Only navigate if there are no errors
+      console.log("Demo user login successful, navigating to /library");
+      navigate('/library');
+    } else {
+      console.error("Demo user login failed:", errorMessages);
+    }
+  };
 
   const openLoginModal = () => {
     setModalContent(<LoginFormModal onClose={closeModal} />);

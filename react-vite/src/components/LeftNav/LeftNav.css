@@ -9,7 +9,6 @@
     padding: 20px;
     position: fixed;
     justify-content: flex-start;
-    /* Align items towards the top */
 }
 
 .nav-user {
@@ -17,9 +16,7 @@
     flex-direction: column;
     align-items: center;
     margin-top: 60px;
-    /* Slight space above the user icon */
     margin-bottom: 75px;
-    /* Adjust this to control space between icon and links */
 }
 
 .user-button {
@@ -31,33 +28,29 @@
 
 .user-button:hover .user-icon {
     color: #007bff;
-    /* Change the color of the icon on hover */
 }
 
 .user-icon {
     font-size: 32px;
-    /* Adjusted font size */
     color: white;
-    /* Default color of the icon */
 }
 
 .user-info {
     margin-top: 10px;
-    /* Space between the icon and the text */
     text-align: center;
     color: white;
-    font-size: 25px;
-    /* Increase the font size */
+    font-size: 16px;
 }
 
 .user-info .user-name {
+    font-size: 16px;
+    font-weight: bold;
     margin-bottom: 7px;
-    /* Space between the username and email */
 }
 
 .user-info .user-email {
-    margin-top: 7px;
-    /* Optional, just to ensure spacing is consistent */
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .nav-links {
@@ -69,14 +62,12 @@
 .nav-links li {
     width: 100%;
     margin-bottom: 100px;
-    /* Space between each link */
 }
 
 .nav-links a {
     text-decoration: none;
     color: white;
     font-size: 30px;
-    /* Increased font size */
     padding: 10px;
     width: 100%;
     display: block;
@@ -91,14 +82,23 @@
 
 .nav-links a:hover {
     background-color: #007bff;
-    /* Change background color on hover */
     color: #ffffff;
-    /* Change text color on hover */
     border-radius: 5px;
-    /* Optional: to match the active-link style */
 }
 
-.nav-links a.active-link {
-    background-color: #007bff;
+.logout-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
     border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.logout-button:hover {
+    background-color: #c0392b;
 }
