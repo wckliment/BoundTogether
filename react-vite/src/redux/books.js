@@ -24,12 +24,78 @@ export const deleteBook = (bookId) => ({
   bookId,
 });
 
-// Thunk action
+// Thunk action for getting books
 export const thunkGetBooks = () => async (dispatch) => {
   const response = await fetch('/api/books/user');
   if (response.ok) {
     const books = await response.json();
     dispatch(setBooks(books));
+  }
+};
+
+// Thunk action for adding a book
+export const thunkAddBook = (bookData) => async (dispatch) => {
+  try {
+    const response = await fetch('/api/books/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bookData),
+    });
+
+    if (response.ok) {
+      const newBook = await response.json();
+      dispatch(addBook(newBook));  // Dispatch the addBook action with the new book
+      return newBook;
+    } else {
+      const errorData = await response.json();
+      return Promise.reject(errorData.errors);
+    }
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+// Thunk action for deleting a book
+export const thunkDeleteBook = (bookId) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/books/${bookId}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      dispatch(deleteBook(bookId));  // Dispatch the delete action
+      return Promise.resolve();  // Resolve the promise
+    } else {
+      return Promise.reject('Failed to delete book');
+    }
+  } catch (error) {
+    return Promise.reject(error);  // Reject the promise with error
+  }
+};
+
+// Thunk action for editing a book
+export const thunkEditBook = (bookData) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/books/${bookData.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(bookData),
+    });
+
+    if (response.ok) {
+      const updatedBook = await response.json();
+      dispatch(editBook(updatedBook));  // Dispatch the editBook action with the updated book
+      return updatedBook;
+    } else {
+      const errorData = await response.json();
+      return Promise.reject(errorData.errors);
+    }
+  } catch (error) {
+    return Promise.reject(error);
   }
 };
 
