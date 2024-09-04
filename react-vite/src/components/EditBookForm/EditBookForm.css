@@ -1,0 +1,38 @@
+.edit-book-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.edit-book-form h2 {
+    margin-bottom: 10px;
+}
+
+.edit-book-form label {
+    font-weight: bold;
+}
+
+.edit-book-form input,
+.edit-book-form textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.edit-book-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-book-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.edit-book-form button[type="button"] {
+    background-color: #f44336;
+    color: white;
+}

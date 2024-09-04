@@ -11,28 +11,20 @@ const LeftNav = () => {
   const navigate = useNavigate();
   const userRef = useRef();
 
-  // Log the user object to verify its contents
-  console.log("User Info:", user);
-
   const toggleUserInfo = () => {
-    console.log("User icon clicked");
     setShowUserInfo(!showUserInfo);
-    console.log("showUserInfo state:", !showUserInfo);
   };
 
   const handleClickOutside = (event) => {
     if (userRef.current && !userRef.current.contains(event.target)) {
-      console.log("Click outside detected, closing user info");
       setShowUserInfo(false);
     }
   };
 
   useEffect(() => {
     if (showUserInfo) {
-      console.log("Adding event listener for outside clicks");
       document.addEventListener('mousedown', handleClickOutside);
     } else {
-      console.log("Removing event listener for outside clicks");
       document.removeEventListener('mousedown', handleClickOutside);
     }
     return () => {
@@ -41,7 +33,6 @@ const LeftNav = () => {
   }, [showUserInfo]);
 
   const handleLogout = () => {
-    console.log("Logging out");
     dispatch(thunkLogout());
     navigate('/');
   };
@@ -67,7 +58,7 @@ const LeftNav = () => {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/book-explorer" activeClassName="active-link">
+          <NavLink to="/explorer" activeClassName="active-link"> {/* Updated path */}
             Book Explorer
           </NavLink>
         </li>
