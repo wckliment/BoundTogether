@@ -1,0 +1,105 @@
+/* Layout for the book explorer page */
+.book-explorer-layout {
+    display: flex;
+}
+
+/* Main container for the book explorer, accounting for the left navigation */
+.book-explorer-container {
+    margin-left: 350px;
+    padding: 20px;
+    width: calc(100% - 350px);
+}
+
+/* Flexbox layout for the list of book tiles */
+.books-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 80px;
+}
+
+/* Individual book tile styling */
+.book-tile {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 250px;
+    height: 450px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.book-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Image styling within the book tile */
+.book-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    object-fit: contain;
+    flex-grow: 1;
+}
+
+/* Styling for the book details text */
+.book-details {
+    margin-bottom: 15px;
+}
+
+/* Extra details for book owner */
+.book-owner {
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+/* Flexbox layout for action buttons within the book tile */
+.book-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+}
+
+/* Common button styles for any additional buttons like exchange request */
+.action-button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+/* Additional styling for other types of buttons */
+.request-button {
+    background-color: #27ae60;
+    color: white;
+}
+
+.request-button:hover {
+    background-color: #1e8449;
+}
+
+/* Styling for the book availability indicator (borrowed or available) */
+.availability-indicator {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.availability-indicator.borrowed {
+    color: #e74c3c;
+    /* Red for borrowed */
+}
+
+.availability-indicator.available {
+    color: #2ecc71;
+    /* Green for available */
+}

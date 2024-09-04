@@ -127,3 +127,12 @@ export default function booksReducer(state = initialState, action) {
       return state;
   }
 }
+
+// Thunk action for getting books from all users except the current user
+export const thunkExploreBooks = () => async (dispatch) => {
+  const response = await fetch('/api/books/explore');
+  if (response.ok) {
+    const books = await response.json();
+    dispatch(setBooks(books)); // Reusing setBooks for now, adjust if needed
+  }
+};
