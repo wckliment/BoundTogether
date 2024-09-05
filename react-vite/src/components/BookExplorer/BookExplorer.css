@@ -3,6 +3,16 @@
     display: flex;
 }
 
+/* Centering the Book Explorer header */
+.book-explorer-container h1 {
+    text-align: center;
+    /* Center the text */
+    width: 100%;
+    /* Ensure it spans the full width */
+    margin-bottom: 20px;
+    /* Add some space below the header */
+}
+
 /* Main container for the book explorer, accounting for the left navigation */
 .book-explorer-container {
     margin-left: 350px;
@@ -18,7 +28,7 @@
     margin-top: 80px;
 }
 
-/* Individual book tile styling */
+/* Adjusted styling for the book tile layout */
 .book-tile {
     background-color: #333;
     color: white;
@@ -26,7 +36,8 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     max-width: 250px;
-    height: 450px;
+    height: auto;
+    /* Removed fixed height to adjust based on content */
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -57,15 +68,23 @@
 
 /* Extra details for book owner */
 .book-owner {
-    font-style: italic;
     margin-bottom: 10px;
+    font-weight: normal;
+    color: #fff;
+    text-transform: capitalize;
+
 }
 
-/* Flexbox layout for action buttons within the book tile */
+/* Ensure that availability icon remains within the tile */
 .book-actions {
     display: flex;
-    justify-content: space-between;
-    margin-top: auto;
+    flex-direction: column;
+    /* Stack elements vertically */
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+    /* Space between availability icon and ER button */
 }
 
 /* Common button styles for any additional buttons like exchange request */
@@ -89,17 +108,68 @@
 }
 
 /* Styling for the book availability indicator (borrowed or available) */
-.availability-indicator {
-    display: inline-block;
+.availability-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
     margin-bottom: 10px;
+    color: white;
+    font-weight: bold;
 }
 
-.availability-indicator.borrowed {
-    color: #e74c3c;
-    /* Red for borrowed */
-}
-
-.availability-indicator.available {
+/* Styling for available status */
+.availability-status .fas.fa-check-circle {
     color: #2ecc71;
     /* Green for available */
+    margin-right: 8px;
+}
+
+/* Styling for borrowed status */
+.availability-status .fas.fa-hourglass-half {
+    color: #e67e22;
+    /* Orange for borrowed */
+    margin-right: 8px;
+}
+
+/* Styling for the book description */
+.book-description {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: #ddd;
+    /* Light color to differentiate it */
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Styling for the circular Exchange Request button */
+.exchange-request-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* Makes the button circular */
+    background-color: #27ae60;
+    /* Green background color */
+    color: white;
+    /* White text */
+    border: none;
+    /* Remove default border */
+    font-size: 16px;
+    /* Text size for "ER" */
+    font-weight: bold;
+    /* Bold text */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centers "ER" inside the button */
+    transition: background-color 0.3s;
+    /* Smooth background color transition */
+}
+
+/* Hover effect for the button */
+.exchange-request-btn:hover {
+    background-color: #1e8449;
+    /* Darker green on hover */
 }
