@@ -7,9 +7,9 @@ function Navigation() {
   const location = useLocation();
 
   // Only render the navigation for certain paths
-  if (location.pathname === "/library", "/explorer") {
+  if (location.pathname === "/library" || location.pathname === "/explorer" || location.pathname === "/exchange-requests") {
     return null;
-  }
+}
 
   return (
     <ul>
