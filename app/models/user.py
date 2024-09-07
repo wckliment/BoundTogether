@@ -16,6 +16,12 @@ class User(db.Model, UserMixin):
     # Relationship to books
     books = db.relationship('Book', back_populates='user', cascade='all, delete-orphan')
 
+    # Exchange requests made by this user (as requester)
+    requested_exchanges = db.relationship('ExchangeRequest', foreign_keys='ExchangeRequest.requester_id', back_populates='requester')
+
+    # Exchange requests for this user's books (as owner)
+    owned_exchanges = db.relationship('ExchangeRequest', foreign_keys='ExchangeRequest.owner_id', back_populates='owner')
+
     @property
     def password(self):
         return self.hashed_password
@@ -32,5 +38,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'books': [book.to_dict() for book in self.books]  # Include books in the dictionary
+            'books': [book.to_dict() for book in self.books],  # Include books in the dictionary
+            'requested_exchanges': [exchange.to_dict() for exchange in self.requested_exchanges],  # Include requested exchanges
+            'owned_exchanges': [exchange.to_dict() for exchange in self.owned_exchanges],  # Include owned exchanges
         }

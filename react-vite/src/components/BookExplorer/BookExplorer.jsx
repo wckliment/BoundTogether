@@ -13,9 +13,17 @@ const BookExplorer = () => {
   }, [dispatch]);
 
   const handleExchangeRequest = (bookId) => {
-    // Placeholder for handling exchange request initiation logic
     console.log(`Exchange request initiated for book ID: ${bookId}`);
   };
+
+  // Add a check to handle loading or no books
+  if (!books) {
+    return <div>Loading books...</div>;
+  }
+
+  if (books.length === 0) {
+    return <div>No books available at the moment.</div>;
+  }
 
   return (
     <div className="book-explorer-layout">
@@ -32,6 +40,11 @@ const BookExplorer = () => {
                 <p>Author: {book.author}</p>
                 <p>Genre: {book.genre}</p>
                 <p className="book-description">{book.description}</p>
+
+                {/* Display average rating */}
+                <div className="book-rating">
+                  <i className="fas fa-star" style={{ color: 'gold' }}></i> {book.averageRating || 'No reviews yet'}
+                </div>
               </div>
               <div className="book-actions">
                 {book.status === 'available' ? (
@@ -43,7 +56,6 @@ const BookExplorer = () => {
                     <i className="fas fa-hourglass-half" style={{ color: 'orange' }}></i> Borrowed
                   </div>
                 )}
-                {/* Add the circular Exchange Request button here */}
                 <button
                   className="exchange-request-btn"
                   onClick={() => handleExchangeRequest(book.id)}

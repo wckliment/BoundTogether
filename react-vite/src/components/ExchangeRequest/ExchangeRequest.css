@@ -1,0 +1,64 @@
+.exchange-request-page {
+    padding: 20px;
+    background-color: #f8f9fa;
+}
+
+.exchange-requests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.exchange-request-tile {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.exchange-request-tile h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.exchange-request-tile p {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+button:focus {
+    outline: none;
+}
+
+button.accept {
+    background-color: #28a745;
+    color: #fff;
+}
+
+button.reject {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+button.completed {
+    background-color: #007bff;
+    color: #fff;
+}

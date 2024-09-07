@@ -10,7 +10,7 @@ class Review(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     reviewer_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     reviewee_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    book_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('books.id')), nullable=False)  # Add this foreign key
+    book_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('books.id')), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.Text, nullable=True)
     created_at = db.Column(db.DateTime, nullable=False, default=lambda: datetime.now(timezone.utc))
@@ -19,7 +19,9 @@ class Review(db.Model):
     # Relationships
     reviewer = db.relationship('User', foreign_keys=[reviewer_id], backref='reviews_given')
     reviewee = db.relationship('User', foreign_keys=[reviewee_id], backref='reviews_received')
-    book = db.relationship('Book', backref='reviews')
+
+    # Use the renamed backref here
+    book = db.relationship('Book', backref='book_details')
 
     def to_dict(self):
         return {

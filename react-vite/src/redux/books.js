@@ -99,16 +99,31 @@ export const thunkEditBook = (bookData) => async (dispatch) => {
   }
 };
 
+// Thunk action for getting books from all users except the current user
+export const thunkExploreBooks = () => async (dispatch) => {
+  try {
+    const response = await fetch('/api/books/explore');
+    if (response.ok) {
+      const books = await response.json();
+      console.log('Books fetched:', books); // Add this line to check the response
+      dispatch(setBooks(books)); // Reusing setBooks for now, adjust if needed
+    } else {
+      console.error('Failed to fetch books');
+    }
+  } catch (error) {
+    console.error('Error fetching books:', error);
+  }
+};
+
 // Initial state
 const initialState = {
   userBooks: [], // Initialize as an empty array
 };
-
 // Reducer
 export default function booksReducer(state = initialState, action) {
   switch (action.type) {
     case SET_BOOKS:
-      return { ...state, userBooks: action.books };  // Save books in userBooks array
+      return { ...state, userBooks: action.books };  // Books include averageRating
     case ADD_BOOK:
       return { ...state, userBooks: [...state.userBooks, action.book] };
     case EDIT_BOOK:
@@ -127,12 +142,3 @@ export default function booksReducer(state = initialState, action) {
       return state;
   }
 }
-
-// Thunk action for getting books from all users except the current user
-export const thunkExploreBooks = () => async (dispatch) => {
-  const response = await fetch('/api/books/explore');
-  if (response.ok) {
-    const books = await response.json();
-    dispatch(setBooks(books)); // Reusing setBooks for now, adjust if needed
-  }
-};

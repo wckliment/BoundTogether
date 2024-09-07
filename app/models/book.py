@@ -20,6 +20,20 @@ class Book(db.Model):
     # Relationship to user
     user = db.relationship('User', back_populates='books')
 
+    # Change the backref here to avoid conflict
+    reviews = db.relationship('Review', backref='book_details', lazy=True)
+
+    exchange_requests = db.relationship('ExchangeRequest', back_populates='book')  
+
+    # Property to calculate the average rating
+    @property
+    def average_rating(self):
+        total_reviews = len(self.reviews)
+        if total_reviews == 0:
+            return 0
+        total_rating = sum([review.rating for review in self.reviews])
+        return round(total_rating / total_reviews, 1)
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -32,4 +46,5 @@ class Book(db.Model):
             'status': self.status,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'averageRating': self.average_rating,
         }
