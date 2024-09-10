@@ -10,16 +10,11 @@ export function ModalProvider({ children }) {
   const [onModalClose, setOnModalClose] = useState(null);
 
   const setModalContent = (content) => {
-    console.log("Setting modalContent to:", content);
     setModalContentState(content);
   };
 
   const closeModal = () => {
-    console.log("closeModal function called");
-    console.log("Before setting modalContent to null:", modalContent);
-    setModalContentState(null); // Clear the modal contents
-    console.log("After setting modalContent to null:", modalContent);
-
+    setModalContentState(null); // Clear modal contents
     if (typeof onModalClose === 'function') {
       setOnModalClose(null);
       onModalClose();
@@ -49,14 +44,16 @@ export function Modal() {
 
   if (!modalRef || !modalRef.current || !modalContent) return null;
 
+  const handleBackgroundClick = (e) => {
+    if (e.target.id === 'modal-background') {
+      closeModal(); // Close modal if the background is clicked
+    }
+  };
+
   return ReactDOM.createPortal(
     <div id="modal">
-      <div id="modal-background" onClick={() => {
-        console.log("Background clicked, closing modal...");
-        closeModal();
-      }} />
+      <div id="modal-background" onClick={handleBackgroundClick} />
       <div id="modal-content">
-        {/* Render the content passed through setModalContent */}
         {modalContent}
       </div>
     </div>,

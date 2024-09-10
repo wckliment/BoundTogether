@@ -2,6 +2,7 @@ const SET_BOOKS = 'books/SET_BOOKS';
 const ADD_BOOK = 'books/ADD_BOOK';
 const EDIT_BOOK = 'books/EDIT_BOOK';
 const DELETE_BOOK = 'books/DELETE_BOOK';
+const UPDATE_BOOK_STATUS = 'books/UPDATE_BOOK_STATUS'; // New action type for updating book status
 
 // Action creators
 export const setBooks = (books) => ({
@@ -22,6 +23,13 @@ export const editBook = (book) => ({
 export const deleteBook = (bookId) => ({
   type: DELETE_BOOK,
   bookId,
+});
+
+// New action for updating the status of a book
+export const updateBookStatus = (bookId, status) => ({
+  type: UPDATE_BOOK_STATUS,
+  bookId,
+  status,
 });
 
 // Thunk action for getting books
@@ -99,6 +107,27 @@ export const thunkEditBook = (bookData) => async (dispatch) => {
   }
 };
 
+// Thunk action for updating the status of a book (available/not available)
+export const thunkUpdateBookStatus = (bookId, status) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/books/${bookId}/status`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status }),  // Send the new status in the body
+    });
+
+    if (response.ok) {
+      dispatch(updateBookStatus(bookId, status));  // Dispatch the updateBookStatus action
+    } else {
+      console.error('Failed to update book status');
+    }
+  } catch (error) {
+    console.error('Error updating book status:', error);
+  }
+};
+
 // Thunk action for getting books from all users except the current user
 export const thunkExploreBooks = () => async (dispatch) => {
   try {
@@ -137,6 +166,13 @@ export default function booksReducer(state = initialState, action) {
       return {
         ...state,
         userBooks: state.userBooks.filter((book) => book.id !== action.bookId),
+      };
+    case UPDATE_BOOK_STATUS:  // Handle updating the status of a book
+      return {
+        ...state,
+        userBooks: state.userBooks.map((book) =>
+          book.id === action.bookId ? { ...book, status: action.status } : book
+        ),
       };
     default:
       return state;

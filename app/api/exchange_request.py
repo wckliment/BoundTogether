@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, ExchangeRequest
+from app.models import db, ExchangeRequest, Book  # Ensure Book is imported
 
 exchange_request_routes = Blueprint('exchange_requests', __name__)
 
@@ -17,6 +17,7 @@ def get_exchange_requests():
     return jsonify([request.to_dict() for request in requests])
 
 # PUT (update) exchange request status
+
 @exchange_request_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_exchange_request(id):
@@ -32,11 +33,17 @@ def update_exchange_request(id):
     data = request.json
     if 'status' in data:
         exchange_request.status = data['status']
+
+        # Update the book's availability status when the exchange is completed
+        if data['status'] == 'completed':
+            book = exchange_request.book  # Assuming exchange_request has a relationship to book
+            book.status = 'not available'  # Update book's status
+            db.session.commit()
+
         db.session.commit()
         return exchange_request.to_dict()
 
     return jsonify({"error": "Invalid request data"}), 400
-
 # POST a new exchange request (optional, if you want to create new requests)
 @exchange_request_routes.route('/', methods=['POST'])
 @login_required

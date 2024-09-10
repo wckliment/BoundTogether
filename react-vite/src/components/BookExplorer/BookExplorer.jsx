@@ -1,22 +1,32 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LeftNav from '../LeftNav/LeftNav';
-import { thunkExploreBooks } from '../../redux/books';  // Import your thunk
+import { thunkExploreBooks } from '../../redux/books';
+import BookExchangeRequestModal from '../BookExchangeRequestModal/BookExchangeRequestModal';  // Import your modal
+import { useModal } from '../../context/Modal'; // Import the useModal hook
 import './BookExplorer.css';
 
 const BookExplorer = () => {
   const dispatch = useDispatch();
-  const books = useSelector((state) => state.books.userBooks); // Assuming you'll use the same state
+  const books = useSelector((state) => state.books.userBooks);
+  const { setModalContent, closeModal } = useModal(); // Use the modal context to manage modal content
 
   useEffect(() => {
-    dispatch(thunkExploreBooks()); // Fetch books for the explorer page
+    dispatch(thunkExploreBooks());
   }, [dispatch]);
 
-  const handleExchangeRequest = (bookId) => {
-    console.log(`Exchange request initiated for book ID: ${bookId}`);
+  const handleExchangeRequest = (book) => {
+    setModalContent(
+      <BookExchangeRequestModal
+        book={book}
+        onClose={() => {
+          closeModal(); // Close the modal
+        }}
+      />
+    ); // Open the modal and set its content to the BookExchangeRequestModal
   };
 
-  // Add a check to handle loading or no books
+  // Check for loading or empty books state
   if (!books) {
     return <div>Loading books...</div>;
   }
@@ -58,7 +68,7 @@ const BookExplorer = () => {
                 )}
                 <button
                   className="exchange-request-btn"
-                  onClick={() => handleExchangeRequest(book.id)}
+                  onClick={() => handleExchangeRequest(book)} // Pass the selected book
                 >
                   ER
                 </button>

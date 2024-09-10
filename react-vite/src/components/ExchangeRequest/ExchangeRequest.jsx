@@ -12,9 +12,13 @@ const ExchangeRequest = () => {
     dispatch(thunkGetExchangeRequests());
   }, [dispatch]);
 
-  const handleStatusUpdate = (requestId, newStatus) => {
-    dispatch(thunkUpdateExchangeRequest(requestId, newStatus));
-  };
+ const handleStatusUpdate = (requestId, newStatus) => {
+  dispatch(thunkUpdateExchangeRequest(requestId, newStatus)).then(() => {
+    if (newStatus === 'completed') {
+      dispatch(thunkExploreBooks());  // Re-fetch the books to update the status
+    }
+  });
+};
 
   return (
     <div className="exchange-request-page">
