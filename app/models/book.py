@@ -13,7 +13,7 @@ class Book(db.Model):
     genre = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=True)
     image_url = db.Column(db.String(255), nullable=True)
-    status = db.Column(db.String(50), nullable=False)
+    status = db.Column(db.String(50), nullable=False, default='available')
     created_at = db.Column(db.DateTime, nullable=False, default=db.func.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=db.func.now(), onupdate=db.func.now())
 
@@ -23,7 +23,7 @@ class Book(db.Model):
     # Change the backref here to avoid conflict
     reviews = db.relationship('Review', backref='book_details', lazy=True)
 
-    exchange_requests = db.relationship('ExchangeRequest', back_populates='book')  
+    exchange_requests = db.relationship('ExchangeRequest', back_populates='book')
 
     # Property to calculate the average rating
     @property
@@ -36,15 +36,16 @@ class Book(db.Model):
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'user_id': self.user_id,
-            'title': self.title,
-            'author': self.author,
-            'genre': self.genre,
-            'description': self.description,
-            'image_url': self.image_url,
-            'status': self.status,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at,
-            'averageRating': self.average_rating,
-        }
+        'id': self.id,
+        'user_id': self.user_id,
+        'title': self.title,
+        'author': self.author,
+        'genre': self.genre,
+        'description': self.description,
+        'image_url': self.image_url,
+        'status': self.status,
+        'created_at': self.created_at,
+        'updated_at': self.updated_at,
+        'averageRating': self.average_rating,
+        # 'owner': self.user.to_dict() if self.user else None,  # Include owner details (user)
+    }

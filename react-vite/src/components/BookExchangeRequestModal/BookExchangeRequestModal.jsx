@@ -10,7 +10,8 @@ const BookExchangeRequestModal = ({ book }) => {
   const [dueDate, setDueDate] = useState('');
   const modalRef = useRef();
 
-  console.log('Rendering Modal for book:', book.title); // Add this line for debugging
+  // Debugging: log the title of the book when the modal renders
+  console.log('Rendering Modal for book:', book);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,10 +19,18 @@ const BookExchangeRequestModal = ({ book }) => {
     const requestData = {
       book_id: book.id,
       due_date: dueDate,
+      owner_id: book.user_id  // Ensure the owner_id is added here
     };
 
-    await dispatch(thunkCreateExchangeRequest(requestData));
-    closeModal();
+    // Debugging: Log the request data to verify that it's correct
+    console.log('Submitting exchange request with data:', requestData);
+
+    try {
+      await dispatch(thunkCreateExchangeRequest(requestData));
+      closeModal();
+    } catch (error) {
+      console.error("Failed to create exchange request:", error);
+    }
   };
 
   const handleOverlayClick = (e) => {
@@ -34,7 +43,9 @@ const BookExchangeRequestModal = ({ book }) => {
     <div className="modal-overlay" onClick={handleOverlayClick}>
       <div className="modal-content" ref={modalRef}>
         <div className="modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
-          <h2 className="modal-title" style={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}>Request Exchange for {book.title}</h2>
+          <h2 className="modal-title" style={{ fontSize: '24px', fontWeight: 'bold', color: 'black' }}>
+            Request Exchange for {book.title}
+          </h2>
           <button className="close-button" style={{ fontSize: '18px', cursor: 'pointer', background: 'none', border: 'none' }} onClick={closeModal}>X</button>
         </div>
         <form onSubmit={handleSubmit}>

@@ -48,19 +48,27 @@ export const thunkUpdateExchangeRequest = (requestId, status) => async (dispatch
 
 // Thunk action for creating a new exchange request
 export const thunkCreateExchangeRequest = (requestData) => async (dispatch) => {
-  const response = await fetch('/api/exchange-requests/', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestData),
-  });
+  try {
+    const response = await fetch('/api/exchange-requests/', { // This calls the backend route
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData), // Ensure that requestData contains all necessary fields
+    });
 
-  if (response.ok) {
-    const newRequest = await response.json();
-    dispatch(addExchangeRequest(newRequest)); // Dispatch the action to add the new request
-    return newRequest;
-  } else {
-    const error = await response.json();
+    if (response.ok) {
+      const newRequest = await response.json();
+      dispatch(addExchangeRequest(newRequest));  // Update Redux state (optional)
+      return newRequest;
+    } else {
+      const errorData = await response.json();
+      console.error('Failed to create exchange request:', errorData); // Log the error
+      return Promise.reject(errorData);
+    }
+  } catch (error) {
     console.error('Failed to create exchange request:', error);
+    return Promise.reject(error);
   }
 };
 

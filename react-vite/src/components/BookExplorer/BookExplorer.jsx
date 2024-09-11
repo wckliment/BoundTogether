@@ -2,20 +2,21 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LeftNav from '../LeftNav/LeftNav';
 import { thunkExploreBooks } from '../../redux/books';
-import BookExchangeRequestModal from '../BookExchangeRequestModal/BookExchangeRequestModal';  // Import your modal
-import { useModal } from '../../context/Modal'; // Import the useModal hook
+import BookExchangeRequestModal from '../BookExchangeRequestModal/BookExchangeRequestModal';
+import { useModal } from '../../context/Modal';
 import './BookExplorer.css';
 
 const BookExplorer = () => {
   const dispatch = useDispatch();
   const books = useSelector((state) => state.books.userBooks);
-  const { setModalContent, closeModal } = useModal(); // Use the modal context to manage modal content
+  const { setModalContent, closeModal } = useModal();
 
   useEffect(() => {
     dispatch(thunkExploreBooks());
   }, [dispatch]);
 
   const handleExchangeRequest = (book) => {
+    // Open the modal with BookExchangeRequestModal and pass the book (including owner_id)
     setModalContent(
       <BookExchangeRequestModal
         book={book}
@@ -23,7 +24,7 @@ const BookExplorer = () => {
           closeModal(); // Close the modal
         }}
       />
-    ); // Open the modal and set its content to the BookExchangeRequestModal
+    );
   };
 
   // Check for loading or empty books state
@@ -46,7 +47,9 @@ const BookExplorer = () => {
               <img src={book.image_url} alt={book.title} className="book-image" />
               <div className="book-details">
                 <h2>{book.title}</h2>
-                <p className="book-owner">Owner: {book.owner}</p>
+                <p className="book-owner">
+                  Owner: {book.owner ? book.owner.username : 'Unknown'}
+                </p> {/* Ensure the owner is displayed */}
                 <p>Author: {book.author}</p>
                 <p>Genre: {book.genre}</p>
                 <p className="book-description">{book.description}</p>
@@ -68,7 +71,7 @@ const BookExplorer = () => {
                 )}
                 <button
                   className="exchange-request-btn"
-                  onClick={() => handleExchangeRequest(book)} // Pass the selected book
+                  onClick={() => handleExchangeRequest(book)} // Pass the book object, including owner_id
                 >
                   ER
                 </button>
