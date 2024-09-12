@@ -21,7 +21,7 @@ class Review(db.Model):
     reviewee = db.relationship('User', foreign_keys=[reviewee_id], backref='reviews_received')
 
     # Use the renamed backref here
-    book = db.relationship('Book', backref='book_details')
+    book = db.relationship('Book', back_populates='reviews', overlaps="book_details,reviews")
 
     def to_dict(self):
         return {

@@ -13,13 +13,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    # Relationship to books
     books = db.relationship('Book', back_populates='user', cascade='all, delete-orphan')
 
-    # Exchange requests made by this user (as requester)
     requested_exchanges = db.relationship('ExchangeRequest', foreign_keys='ExchangeRequest.requester_id', back_populates='requester')
 
-    # Exchange requests for this user's books (as owner)
     owned_exchanges = db.relationship('ExchangeRequest', foreign_keys='ExchangeRequest.owner_id', back_populates='owner')
 
     @property
@@ -33,12 +30,14 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
-    def to_dict(self):
-        return {
+    def to_dict(self, include_books=False):
+        user_dict = {
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'books': [book.to_dict() for book in self.books],  # Include books in the dictionary
-            'requested_exchanges': [exchange.to_dict() for exchange in self.requested_exchanges],  # Include requested exchanges
-            'owned_exchanges': [exchange.to_dict() for exchange in self.owned_exchanges],  # Include owned exchanges
         }
+
+        if include_books:
+            user_dict['books'] = [book.to_dict() for book in self.books]
+
+        return user_dict

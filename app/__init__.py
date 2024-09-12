@@ -8,7 +8,8 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.book_routes import book_routes
-from .api.exchange_request import exchange_request_routes  # <-- Import exchange request routes
+from .api.exchange_request import exchange_request_routes
+from .api.review_routes import review_routes  # <-- Import review routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -18,11 +19,9 @@ app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
 
-
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
@@ -31,7 +30,8 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(book_routes, url_prefix='/api/books')
-app.register_blueprint(exchange_request_routes, url_prefix='/api/exchange-requests')  # <-- Register the new blueprint
+app.register_blueprint(exchange_request_routes, url_prefix='/api/exchange-requests')
+app.register_blueprint(review_routes, url_prefix='/api/reviews')  # <-- Register review routes
 
 db.init_app(app)
 Migrate(app, db)
@@ -48,7 +48,6 @@ def https_redirect():
             code = 301
             return redirect(url, code=code)
 
-
 @app.after_request
 def inject_csrf_token(response):
     response.set_cookie(
@@ -59,7 +58,6 @@ def inject_csrf_token(response):
             'FLASK_ENV') == 'production' else None,
         httponly=True)
     return response
-
 
 @app.route("/api/docs")
 def api_help():
@@ -72,7 +70,6 @@ def api_help():
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
 
-
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def react_root(path):
@@ -84,7 +81,6 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
-
 
 @app.errorhandler(404)
 def not_found(e):

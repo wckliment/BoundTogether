@@ -3,6 +3,7 @@ const ADD_BOOK = 'books/ADD_BOOK';
 const EDIT_BOOK = 'books/EDIT_BOOK';
 const DELETE_BOOK = 'books/DELETE_BOOK';
 const UPDATE_BOOK_STATUS = 'books/UPDATE_BOOK_STATUS'; // New action type for updating book status
+const UPDATE_BOOK = 'books/UPDATE_BOOK';
 
 // Action creators
 export const setBooks = (books) => ({
@@ -30,6 +31,12 @@ export const updateBookStatus = (bookId, status) => ({
   type: UPDATE_BOOK_STATUS,
   bookId,
   status,
+});
+
+// Action creator for updating a book
+export const updateBook = (book) => ({
+  type: UPDATE_BOOK,
+  book,
 });
 
 // Thunk action for getting books
@@ -148,7 +155,6 @@ export const thunkExploreBooks = () => async (dispatch) => {
 const initialState = {
   userBooks: [], // Initialize as an empty array
 };
-// Reducer
 export default function booksReducer(state = initialState, action) {
   switch (action.type) {
     case SET_BOOKS:
@@ -172,6 +178,13 @@ export default function booksReducer(state = initialState, action) {
         ...state,
         userBooks: state.userBooks.map((book) =>
           book.id === action.bookId ? { ...book, status: action.status } : book
+        ),
+      };
+    case UPDATE_BOOK:  // Handle updating the entire book with new details (including rating)
+      return {
+        ...state,
+        userBooks: state.userBooks.map((book) =>
+          book.id === action.book.id ? action.book : book
         ),
       };
     default:

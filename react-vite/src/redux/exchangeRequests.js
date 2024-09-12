@@ -1,6 +1,7 @@
 const SET_EXCHANGE_REQUESTS = 'exchangeRequests/SET_EXCHANGE_REQUESTS';
 const UPDATE_EXCHANGE_REQUEST = 'exchangeRequests/UPDATE_EXCHANGE_REQUEST';
 const ADD_EXCHANGE_REQUEST = 'exchangeRequests/ADD_EXCHANGE_REQUEST'; // New action type
+const DELETE_EXCHANGE_REQUEST = 'exchangeRequests/DELETE_EXCHANGE_REQUEST';
 
 // Action creators
 export const setExchangeRequests = (requests) => ({
@@ -18,6 +19,11 @@ export const addExchangeRequest = (request) => ({
   request,
 });
 
+export const deleteExchangeRequest = (requestId) => ({
+  type: DELETE_EXCHANGE_REQUEST,
+  requestId,
+});
+
 // Thunk action for getting exchange requests
 export const thunkGetExchangeRequests = () => async (dispatch) => {
   const response = await fetch('/api/exchange-requests/');
@@ -29,17 +35,17 @@ export const thunkGetExchangeRequests = () => async (dispatch) => {
   }
 };
 
-// Thunk action for updating an exchange request (e.g., accepting/rejecting)
-export const thunkUpdateExchangeRequest = (requestId, status) => async (dispatch) => {
+// Thunk action for updating an exchange request (e.g., status, due date, etc.)
+export const thunkUpdateExchangeRequest = (requestId, requestData) => async (dispatch) => {
   const response = await fetch(`/api/exchange-requests/${requestId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ status }),
+    body: JSON.stringify(requestData),  // Pass the full request data, not just the status
   });
 
   if (response.ok) {
     const updatedRequest = await response.json();
-    dispatch(updateExchangeRequest(updatedRequest));
+    dispatch(updateExchangeRequest(updatedRequest));  // Update Redux with the updated request
   } else {
     const error = await response.json();
     console.error('Failed to update exchange request:', error);
@@ -72,6 +78,20 @@ export const thunkCreateExchangeRequest = (requestData) => async (dispatch) => {
   }
 };
 
+export const thunkDeleteExchangeRequest = (requestId) => async (dispatch) => {
+  const response = await fetch(`/api/exchange-requests/${requestId}`, {
+    method: 'DELETE',
+  });
+
+  if (response.ok) {
+    dispatch(deleteExchangeRequest(requestId)); // Update Redux store
+  } else {
+    const error = await response.json();
+    console.error('Failed to delete exchange request:', error);
+  }
+};
+
+
 // Reducer
 const initialState = { exchangeRequests: [] };
 
@@ -90,6 +110,13 @@ export default function exchangeRequestsReducer(state = initialState, action) {
       return {
         ...state,
         exchangeRequests: [...state.exchangeRequests, action.request], // Add new request to the state
+      };
+    case DELETE_EXCHANGE_REQUEST: // Handle deleting the request
+      return {
+        ...state,
+        exchangeRequests: state.exchangeRequests.filter(
+          (req) => req.id !== action.requestId // Remove the deleted request from the state
+        ),
       };
     default:
       return state;

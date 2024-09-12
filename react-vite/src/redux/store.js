@@ -7,12 +7,14 @@ import {
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import booksReducer from "./books";
-import exchangeRequestsReducer from "./exchangeRequests";  
+import exchangeRequestsReducer from "./exchangeRequests";
+import reviewsReducer from "./reviews";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   books: booksReducer,
   exchangeRequests: exchangeRequestsReducer,
+  reviews: reviewsReducer
 });
 
 let enhancer;

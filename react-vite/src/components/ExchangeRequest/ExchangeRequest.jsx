@@ -1,20 +1,26 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { thunkGetExchangeRequests, thunkUpdateExchangeRequest } from '../../redux/exchangeRequests';
+import { thunkGetExchangeRequests, thunkUpdateExchangeRequest, thunkDeleteExchangeRequest } from '../../redux/exchangeRequests';
 import LeftNav from '../LeftNav/LeftNav';
 import './ExchangeRequest.css';
 
 const ExchangeRequest = () => {
   const dispatch = useDispatch();
   const exchangeRequests = useSelector((state) => state.exchangeRequests.exchangeRequests);
-  const currentUser = useSelector((state) => state.session.user); // Assuming your session state has the logged-in user
+  const currentUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
-    dispatch(thunkGetExchangeRequests()); // Ensure you're calling the correct thunk
+    dispatch(thunkGetExchangeRequests());
   }, [dispatch]);
 
   const handleStatusUpdate = (requestId, newStatus) => {
     dispatch(thunkUpdateExchangeRequest(requestId, newStatus));
+  };
+
+  const handleDeleteRequest = (requestId) => {
+    if (window.confirm('Are you sure you want to delete this exchange request?')) {
+      dispatch(thunkDeleteExchangeRequest(requestId));
+    }
   };
 
   return (
@@ -34,7 +40,7 @@ const ExchangeRequest = () => {
                     <p>Status: {request.status}</p>
                     {request.due_date && <p>Due Date: {new Date(request.due_date).toLocaleDateString()}</p>}
 
-                    {/* Only show the Accept and Reject buttons if the current user is the owner of the book */}
+                    {/* Accept/Reject buttons for owners */}
                     {currentUser.id === request.owner.id && request.status === 'pending' && (
                       <div className="actions">
                         <button className="accept" onClick={() => handleStatusUpdate(request.id, 'accepted')}>
@@ -46,12 +52,17 @@ const ExchangeRequest = () => {
                       </div>
                     )}
 
-                    {/* Show the "Completed" button only if the status is accepted */}
+                    {/* Mark as Completed button */}
                     {currentUser.id === request.owner.id && request.status === 'accepted' && (
                       <button className="completed" onClick={() => handleStatusUpdate(request.id, 'completed')}>
                         Mark as Completed
                       </button>
                     )}
+
+                    {/* Delete button */}
+                    <button className="delete" onClick={() => handleDeleteRequest(request.id)}>
+                      Delete Request
+                    </button>
                   </>
                 ) : (
                   <p>Book information not available</p>

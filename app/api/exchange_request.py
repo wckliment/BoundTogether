@@ -74,3 +74,20 @@ def create_exchange_request():
     except Exception as e:
         print("Error creating exchange request:", str(e))  # Log the error
         return jsonify({"error": str(e)}), 500
+
+
+    # Delete an exchange request
+@exchange_request_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_exchange_request(id):
+    exchange_request = ExchangeRequest.query.get(id)
+
+    if not exchange_request:
+        return jsonify({"error": "Exchange request not found"}), 404
+
+    if exchange_request.requester_id != current_user.id and exchange_request.owner_id != current_user.id:
+        return jsonify({"error": "Unauthorized"}), 403
+
+    db.session.delete(exchange_request)
+    db.session.commit()
+    return jsonify({"message": "Exchange request deleted successfully"}), 200

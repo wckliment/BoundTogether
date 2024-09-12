@@ -21,7 +21,7 @@ class Book(db.Model):
     user = db.relationship('User', back_populates='books')
 
     # Change the backref here to avoid conflict
-    reviews = db.relationship('Review', backref='book_details', lazy=True)
+    reviews = db.relationship('Review', backref='book_details', lazy=True, overlaps="book,reviews")
 
     exchange_requests = db.relationship('ExchangeRequest', back_populates='book')
 
@@ -35,17 +35,22 @@ class Book(db.Model):
         return round(total_rating / total_reviews, 1)
 
     def to_dict(self):
+        # Debugging: Log the book title and owner info to the backend logs
+        if self.user:
+            print(f"Book: {self.title}, Owner: {self.user.to_dict()}")  # Add this line
+
         return {
-        'id': self.id,
-        'user_id': self.user_id,
-        'title': self.title,
-        'author': self.author,
-        'genre': self.genre,
-        'description': self.description,
-        'image_url': self.image_url,
-        'status': self.status,
-        'created_at': self.created_at,
-        'updated_at': self.updated_at,
-        'averageRating': self.average_rating,
-        # 'owner': self.user.to_dict() if self.user else None,  # Include owner details (user)
-    }
+            'id': self.id,
+            'user_id': self.user_id,
+            'title': self.title,
+            'author': self.author,
+            'genre': self.genre,
+            'description': self.description,
+            'image_url': self.image_url,
+            'status': self.status,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
+            'averageRating': self.average_rating,
+            'owner': self.user.to_dict() if self.user else None,  # Include owner details
+            'reviews': [review.to_dict() for review in self.reviews]  # Include associated reviews
+        }
