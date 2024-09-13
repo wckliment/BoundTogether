@@ -1,16 +1,22 @@
+/* Left Nav Styling */
 .left-nav {
     width: 200px;
     height: 100vh;
     background-color: #333;
-    color: white;
+    /* Dark background consistent with other pages */
+    color: #EEDFCC;
+    /* Light beige text for readability */
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     position: fixed;
     justify-content: flex-start;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
+    /* Add subtle shadow for depth */
 }
 
+/* User Info Styling */
 .nav-user {
     display: flex;
     flex-direction: column;
@@ -27,18 +33,21 @@
 }
 
 .user-button:hover .user-icon {
-    color: #007bff;
+    color: #CBA135;
+    /* Muted Gold on hover */
 }
 
 .user-icon {
     font-size: 32px;
-    color: white;
+    color: #EEDFCC;
+    /* Light beige icon */
 }
 
 .user-info {
     margin-top: 10px;
     text-align: center;
-    color: white;
+    color: #EEDFCC;
+    /* Consistent light beige for user info */
     font-size: 16px;
 }
 
@@ -53,6 +62,7 @@
     margin-bottom: 10px;
 }
 
+/* Navigation Links */
 .nav-links {
     list-style-type: none;
     padding: 0;
@@ -61,33 +71,41 @@
 
 .nav-links li {
     width: 100%;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
+    /* Reduced margin for more compact layout */
 }
 
 .nav-links a {
     text-decoration: none;
-    color: white;
+    color: #EEDFCC;
+    /* Light beige for link text */
     font-size: 30px;
     padding: 10px;
     width: 100%;
     display: block;
     text-align: center;
     cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .nav-links a.active-link {
-    background-color: #007bff;
+    background-color: #CBA135;
+    /* Muted gold for active link */
     border-radius: 5px;
 }
 
 .nav-links a:hover {
-    background-color: #007bff;
-    color: #ffffff;
+    background-color: #CBA135;
+    /* Muted gold on hover */
+    color: #FFFFFF;
+    /* White text on hover */
     border-radius: 5px;
 }
 
+/* Logout Button Styling */
 .logout-button {
-    background-color: #e74c3c;
+    background-color: #E9967A;
+    /* Soft salmon for logout button */
     color: white;
     border: none;
     padding: 8px 12px;
@@ -100,5 +118,6 @@
 }
 
 .logout-button:hover {
-    background-color: #c0392b;
+    background-color: #C0392B;
+    /* Darker red on hover */
 }

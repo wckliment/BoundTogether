@@ -1,23 +1,31 @@
 /* Layout for the book explorer page */
 .book-explorer-layout {
     display: flex;
+    gap:0;
 }
 
 /* Centering the Book Explorer header */
 .book-explorer-container h1 {
     text-align: center;
-    /* Center the text */
     width: 100%;
-    /* Ensure it spans the full width */
     margin-bottom: 20px;
-    /* Add some space below the header */
+    font-size: 64px;
+    font-weight: 700;
+    color: #E9967A;
+    /* Soft salmon for header */
+    text-transform: uppercase;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Main container for the book explorer, accounting for the left navigation */
 .book-explorer-container {
-    margin-left: 350px;
-    padding: 20px;
-    width: calc(100% - 350px);
+    margin-left: 200px;
+    padding-left: 0;
+    padding:0;
+    /* width: calc(100% - 350px); */
+    background: linear-gradient(rgba(43, 43, 43, 0.8), rgba(43, 43, 43, 0.8)), url('https://imgs.search.brave.com/Bi4KGJkcS6Fxd2mo4tweFMJTRN3nwm89Gz_JX7AD4ak/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAzLzg3LzE1Lzc5/LzM2MF9GXzM4NzE1/Nzk2Nl90UmphcFY3/bHlrQmRPU01Icklm/cllETDVBcEhqaGtG/Ui5qcGc') no-repeat center center fixed;
+    background-size: cover;
 }
 
 /* Flexbox layout for the list of book tiles */
@@ -26,18 +34,25 @@
     flex-wrap: wrap;
     gap: 20px;
     margin-top: 80px;
+    justify-content: center;
+    /* Center the book tiles */
+    align-items: flex-start;
+        /* Align tiles at the top */
+        margin-top: 80px;
 }
 
 /* Adjusted styling for the book tile layout */
 .book-tile {
-    background-color: #333;
-    color: white;
+    background-color: rgba(51, 51, 51, 0.9);
+    /* Dark translucent background */
+    color: #EEDFCC;
+    /* Light beige text */
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 250px;
+    max-width: 350px;
+    /* Increased width */
     height: auto;
-    /* Removed fixed height to adjust based on content */
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -54,7 +69,8 @@
 .book-image {
     max-width: 100%;
     height: auto;
-    max-height: 200px;
+    max-height: 300px;
+    /* Increase image height */
     border-radius: 8px;
     margin-bottom: 15px;
     object-fit: contain;
@@ -64,47 +80,51 @@
 /* Styling for the book details text */
 .book-details {
     margin-bottom: 15px;
+    font-size: 18px;
+    /* Increase font size for readability */
 }
 
 /* Extra details for book owner */
 .book-owner {
     margin-bottom: 10px;
     font-weight: normal;
-    color: #fff;
+    color: #EEDFCC;
+    /* Consistent light beige color */
     text-transform: capitalize;
-
 }
 
 /* Ensure that availability icon remains within the tile */
 .book-actions {
     display: flex;
     flex-direction: column;
-    /* Stack elements vertically */
     justify-content: center;
     align-items: center;
     margin-top: 10px;
     gap: 10px;
-    /* Space between availability icon and ER button */
 }
 
 /* Common button styles for any additional buttons like exchange request */
 .action-button {
-    padding: 8px 12px;
+    padding: 12px 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     transition: background-color 0.3s;
 }
 
-/* Additional styling for other types of buttons */
+/* Styling for the Exchange Request button */
 .request-button {
-    background-color: #27ae60;
-    color: white;
+    background-color: #CBA135;
+    /* Muted gold */
+    color: #2F2F2F;
+    /* Dark gray text */
+    font-weight: 700;
 }
 
 .request-button:hover {
-    background-color: #1e8449;
+    background-color: #B8902D;
+    /* Slightly darker gold on hover */
 }
 
 /* Styling for the book availability indicator (borrowed or available) */
@@ -114,7 +134,8 @@
     justify-content: center;
     font-size: 16px;
     margin-bottom: 10px;
-    color: white;
+    color: #EEDFCC;
+    /* Light beige text */
     font-weight: bold;
 }
 
@@ -137,40 +158,62 @@
     margin-top: 10px;
     margin-bottom: 15px;
     color: #ddd;
-    /* Light color to differentiate it */
+    /* Light gray text for description */
     font-size: 14px;
     line-height: 1.5;
 }
 
-/*comment */
-
+/* Exchange Request Button */
 .exchange-request-btn {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    /* Makes the button circular */
-    background-color: #27ae60;
-    /* Green background color */
-    color: white;
-    /* White text */
+    background-color: #CBA135;
+    /* Muted gold */
+    color: #2F2F2F;
+    /* Dark gray text */
     border: none;
-    /* Remove default border */
     font-size: 16px;
-    /* Text size for "ER" */
     font-weight: bold;
-    /* Bold text */
     cursor: pointer;
-    /* Pointer cursor on hover */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Centers "ER" inside the button */
     transition: background-color 0.3s;
-    /* Smooth background color transition */
 }
 
-/* Hover effect for the button */
 .exchange-request-btn:hover {
-    background-color: #1e8449;
-    /* Darker green on hover */
+    background-color: #B8902D;
+    /* Darker gold on hover */
+}
+
+.leave-review-btn {
+    background-color: #CBA135;
+    /* Muted Gold */
+    color: #2F2F2F;
+    /* Dark Gray Text */
+    padding: 9px 18px;
+    font-size: 15px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, transform 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 18px;
+}
+
+.leave-review-btn:hover {
+    background-color: #B8902D;
+    /* Darker gold on hover */
+    transform: translateY(-3px);
+    /* Slight lift effect */
+}
+
+.leave-review-btn:active {
+    background-color: #A3781E;
+    /* Darker gold when clicked */
+    transform: translateY(0);
+    /* Remove lift effect when clicked */
 }
