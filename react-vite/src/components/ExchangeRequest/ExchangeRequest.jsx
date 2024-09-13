@@ -18,9 +18,8 @@ const ExchangeRequest = () => {
   };
 
   const handleDeleteRequest = (requestId) => {
-    if (window.confirm('Are you sure you want to delete this exchange request?')) {
-      dispatch(thunkDeleteExchangeRequest(requestId));
-    }
+    // Directly delete the exchange request without confirmation
+    dispatch(thunkDeleteExchangeRequest(requestId));
   };
 
   return (

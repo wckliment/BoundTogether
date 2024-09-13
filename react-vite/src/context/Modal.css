@@ -1,3 +1,4 @@
+/* Modal Overlay */
 #modal {
   position: fixed;
   top: 0;
@@ -10,20 +11,81 @@
   z-index: 1000;
 }
 
+/* Modal Background */
 #modal-background {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Darker background for contrast */
 }
 
+/* Modal Content */
 #modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  z-index: 1001;
+  background-color: rgba(43, 43, 43, 0.95);
+  /* Dark translucent background */
+  padding: 25px;
+  border-radius: 8px;
   width: 400px;
+  z-index: 1001;
+  color: #EEDFCC;
+  /* Light beige text */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
   position: relative;
+}
+
+/* Close Button */
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #EEDFCC;
+  /* Light beige text */
+}
+
+.close-button:hover {
+  color: #CBA135;
+  /* Muted gold on hover */
+}
+
+/* Input Fields */
+.form-group input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #444444;
+  background-color: #333333;
+  color: #EEDFCC;
+  /* Light beige text */
+  width: 100%;
+}
+
+/* Submit Button */
+.submit-button {
+  margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  background-color: #CBA135;
+  /* Muted gold */
+  color: #2F2F2F;
+  /* Dark gray text */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.submit-button:hover {
+  background-color: #B8902D;
+  /* Darker gold on hover */
 }
