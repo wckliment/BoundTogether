@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Navigate } from 'react-router-dom';  //comement
+import { useNavigate, Navigate } from 'react-router-dom';
 import { thunkLogin } from '../../redux/session';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -9,7 +9,7 @@ import './SplashPage.css';
 
 const SplashPage = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();  // useNavigate hook
+  const navigate = useNavigate();
   const { setModalContent, closeModal } = useModal();
   const isAuthenticated = useSelector((state) => state.session.isAuthenticated);
 
@@ -19,7 +19,7 @@ const SplashPage = () => {
 
     const errorMessages = await dispatch(thunkLogin(credentials));
 
-    if (!errorMessages) {  // Only navigate if there are no errors
+    if (!errorMessages) {
       console.log("Demo user login successful, navigating to /library");
       navigate('/library');
     } else {
@@ -41,7 +41,9 @@ const SplashPage = () => {
 
   return (
     <div className="splash-container">
-      <img src="/logo.png" alt="BoundTogether Logo" className="logo" />
+      {/* New large BoundTogether title */}
+      <h1 className="title">BoundTogether</h1>
+
       <div className="header">
         <h2>&quot;Start trading books today!&quot;</h2>
       </div>
@@ -53,7 +55,7 @@ const SplashPage = () => {
         </button>
       </div>
       <div className="description">
-        <p>BoundTogether is your platform for trading books with others. Manage your personal library, browse, and exchange books with ease.</p>
+        <p>BOUNDTOGETHER is your platform for trading books with others. Manage your personal library, browse, and exchange books with ease.</p>
       </div>
     </div>
   );

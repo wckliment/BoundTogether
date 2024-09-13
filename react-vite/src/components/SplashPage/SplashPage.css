@@ -6,10 +6,23 @@
     justify-content: center;
     min-height: 100vh;
     padding: 20px;
-    background-color: #2B2B2B;
+    background: linear-gradient(rgba(43, 43, 43, 0.8), rgba(43, 43, 43, 0.8)), url('https://imgs.search.brave.com/Bi4KGJkcS6Fxd2mo4tweFMJTRN3nwm89Gz_JX7AD4ak/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAzLzg3LzE1Lzc5/LzM2MF9GXzM4NzE1/Nzk2Nl90UmphcFY3/bHlrQmRPU01Icklm/cllETDVBcEhqaGtG/Ui5qcGc') no-repeat center center fixed;
+    background-size: cover;
     text-align: center;
     position: relative;
-    /* Allows absolute positioning inside */
+}
+
+.title {
+    font-size: 120px;
+    /* Keep the large font size */
+    font-weight: 700;
+    color: #E9967A;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-top: -120px;
+    /* Move closer to the top of the page */
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+    font-family: 'Poppins', sans-serif;
 }
 
 .logo {
@@ -20,47 +33,62 @@
 }
 
 .header h2 {
-    color: #F5F5F5;
-    font-size: 36px;
-    /* Apply White Smoke to the "Start trading books today!" text */
+    color: #EEDFCC;
+    font-size: 45px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+    margin-top: 85px;
+    font-style: italic;
+    /* Italics added */
 }
 
 .header {
     margin-bottom: 30px;
     margin-top: -120px;
     font-weight: 600;
-    /* Adjust the weight to your preference */
 }
 
 .buttons {
     display: flex;
     gap: 10px;
-    margin-top: 175px;
+    margin-top: 50px;
 }
 
 .btn {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 18px 35px;
+    font-size: 18px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: rgb(200, 120, 224);
-    color: white;
-    font-weight: 500;
-    /* Adjust button font weight */
+    background-color: #CBA135;
+    /* Correct Soft Brown color */
+    color: #2F2F2F;
+    font-weight: 1000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #007bff;
+    background-color: #E9967A;
+    transform: scale(1.05);
 }
 
 .description {
     margin-top: 80px;
-    font-size: 18px;
+    font-size: 22px;
     max-width: 600px;
-    color: #333;
-    font-weight: 300;
     color: #F5F5F5;
+    font-weight: 300;
     font-style: italic;
-    /* Light font weight for description */
+    color: #EEDFCC;
+}
+
+.splash-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.8), transparent);
+    z-index: -1;
 }
