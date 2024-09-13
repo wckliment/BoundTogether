@@ -3,6 +3,7 @@
 .layout-container {
     display: flex;
     min-height: 100vh;
+    gap:0;
 }
 
 .left-nav {
@@ -12,5 +13,5 @@
 
 .main-content {
     flex-grow: 1;
-    padding: 20px;
+    padding: 0;
 }
