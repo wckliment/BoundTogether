@@ -15,16 +15,37 @@ function SignupFormModal() {
 
   const modalRef = useRef();
 
+  const validateForm = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
+    if (username.length < 4) {
+      newErrors.username = "Username must be at least 4 characters long.";
+    }
+
+    if (password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long.";
+    }
+
+    if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
-    }
+    // Perform client-side validation
+    if (!validateForm()) return;
 
+    // If validation passes, make the signup request
     const serverResponse = await dispatch(
       thunkSignup({
         email,
@@ -33,6 +54,7 @@ function SignupFormModal() {
       })
     );
 
+    // Handle server-side errors
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
