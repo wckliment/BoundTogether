@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { thunkGetBooks, thunkDeleteBook } from '../../redux/books';
 import LeftNav from '../LeftNav/LeftNav';
 import AddBookForm from '../AddBookForm/AddBookForm';
-import EditBookForm from '../EditBookForm/EditBookForm';  // Import the EditBookForm component
+import EditBookForm from '../EditBookForm/EditBookForm';
 import { useModal } from '../../context/Modal';
 import './PersonalLibrary.css';
 
@@ -52,27 +52,35 @@ const PersonalLibrary = () => {
           <h1>My Personal Library</h1>
           <button className="add-book-button" onClick={openAddBookModal}>Add Book</button>
         </div>
-        <div className="books-list">
-          {books.map((book) => (
-            <div key={book.id} className="book-tile">
-              <img src={book.image_url} alt={book.title} className="book-image" />
-              <div className="book-details">
-                <h2>{book.title}</h2>
-                <p>Author: {book.author}</p>
-                <p>Genre: {book.genre}</p>
+
+        {/* Show this message when there are no books */}
+        {books.length === 0 ? (
+          <div className="empty-library-message">
+            <p>Your library is empty! Start by adding a new book.</p>
+          </div>
+        ) : (
+          <div className="books-list">
+            {books.map((book) => (
+              <div key={book.id} className="book-tile">
+                <img src={book.image_url} alt={book.title} className="book-image" />
+                <div className="book-details">
+                  <h2>{book.title}</h2>
+                  <p>Author: {book.author}</p>
+                  <p>Genre: {book.genre}</p>
+                </div>
+                <div className="book-actions">
+                  <button className="edit-button" onClick={() => openEditBookModal(book)}>Edit</button>
+                  <button
+                    className="delete-button"
+                    onClick={() => openDeleteConfirmationModal(book.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-              <div className="book-actions">
-                <button className="edit-button" onClick={() => openEditBookModal(book)}>Edit</button>
-                <button
-                  className="delete-button"
-                  onClick={() => openDeleteConfirmationModal(book.id)}
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

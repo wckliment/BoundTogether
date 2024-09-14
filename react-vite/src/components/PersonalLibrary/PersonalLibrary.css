@@ -1,23 +1,35 @@
 /* Layout for the personal library page */
 .personal-library-layout {
     display: flex;
-    gap:0;
+    gap: 0;
+    min-height: 100vh;
+    /* Ensure the layout takes up the full viewport height */
 }
 
 /* Apply the same background as the splash page */
 .personal-library-container {
-    margin-left: 200px;
-    padding-left: 0;
-    padding: 0;
-    /* width: calc(100% - 200px); */
+    flex-grow: 1;
+    padding: 200px;
     background: linear-gradient(rgba(43, 43, 43, 0.8), rgba(43, 43, 43, 0.8)), url('https://imgs.search.brave.com/Bi4KGJkcS6Fxd2mo4tweFMJTRN3nwm89Gz_JX7AD4ak/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAzLzg3LzE1Lzc5/LzM2MF9GXzM4NzE1/Nzk2Nl90UmphcFY3/bHlrQmRPU01Icklm/cllETDVBcEhqaGtG/Ui5qcGc') no-repeat center center fixed;
     background-size: cover;
+    min-height: 100vh;
+    /* Ensures the container takes the full viewport height */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /* Centers content horizontally */
 }
 
 /* Header container styling */
 .header-container {
     text-align: center;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
+    margin-top: -180px;
+    padding-top: 0;
+    position: relative;
+    top: -20px;
+    /* Add more spacing below the header */
 }
 
 /* Title styling similar to the splash page */
@@ -63,10 +75,19 @@
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
-    /* Center the book tiles horizontally */
     align-items: flex-start;
-    /* Align tiles at the top */
     margin-top: 80px;
+    width: 100%;
+    /* Ensure the books-list spans full width */
+}
+
+/* Message when there are no books */
+.empty-library-message {
+    text-align: center;
+    margin-top: 50px;
+    color: #EEDFCC;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 /* Individual book tile styling */
@@ -220,5 +241,3 @@
 .cancel-button:hover {
     background-color: #95a5a6;
 }
-
-
