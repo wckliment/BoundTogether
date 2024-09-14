@@ -6,7 +6,7 @@ import { thunkGetReviews } from '../../redux/reviews';
 import BookExchangeRequestModal from '../BookExchangeRequestModal/BookExchangeRequestModal';
 import ReviewModal from '../ReviewModal/ReviewModal';
 import { useModal } from '../../context/Modal';
-import './BookExplorer.css'; //add comment
+import './BookExplorer.css'; //new comment
 
 const BookExplorer = () => {
   const dispatch = useDispatch();
