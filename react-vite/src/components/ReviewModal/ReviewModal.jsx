@@ -32,7 +32,7 @@ const ReviewModal = ({ book, onClose, existingReview }) => {
       onClick={() => setRating(starNumber)}
       onMouseEnter={() => setHoverRating(starNumber)}
       onMouseLeave={() => setHoverRating(0)}
-      style={{ cursor: 'pointer', color: starNumber <= (hoverRating || rating) ? 'gold' : 'gray' }}
+      style={{ cursor: 'pointer' }}
     ></i>
   );
 
@@ -45,8 +45,14 @@ const ReviewModal = ({ book, onClose, existingReview }) => {
             <Star key={starNumber} starNumber={starNumber} />
           ))}
         </div>
-        <button type="submit" disabled={rating === 0}>Submit Rating</button>  {/* Disable until a rating is selected */}
-        <button type="button" onClick={onClose}>Cancel</button>
+        <div className="form-buttons">
+          <button type="submit" className="submit-button" disabled={rating === 0}>
+            Submit Rating
+          </button>
+          <button type="button" className="cancel-button" onClick={onClose}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

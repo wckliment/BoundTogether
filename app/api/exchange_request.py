@@ -32,16 +32,23 @@ def update_exchange_request(id):
         return jsonify({"error": "Unauthorized"}), 403
 
     data = request.json
+
     if 'status' in data:
-        exchange_request.status = data['status']
+        new_status = data['status']
+        exchange_request.status = new_status
 
-        # Update the book's availability status when the exchange is completed
-        if data['status'] == 'completed':
+        # Update the book's availability based on status
+        if new_status == 'accepted':
             book = exchange_request.book  # Assuming the relationship exists
-            book.status = 'not available'  # Update the book's status in the Book model
-            db.session.commit()
+            book.status = 'borrowed'  # Update the book's status in the Book model
+        elif new_status == 'completed':
+            book = exchange_request.book
+            book.status = 'not available'  # The book is now marked as not available
+        elif new_status == 'rejected':
+            book = exchange_request.book
+            book.status = 'available'  # If the exchange is rejected, the book stays available
 
-        db.session.commit()  # Commit the updated exchange request status
+        db.session.commit()  # Commit the updated exchange request status and book status
         return exchange_request.to_dict()
 
     return jsonify({"error": "Invalid request data"}), 400

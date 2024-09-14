@@ -10,9 +10,26 @@ const AddBookForm = ({ closeModal }) => {
   const [genre, setGenre] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [errors, setErrors] = useState({}); // State for handling errors
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!title.trim()) newErrors.title = 'Title is required.';
+    if (!author.trim()) newErrors.author = 'Author is required.';
+    if (!genre.trim()) newErrors.genre = 'Genre is required.';
+    if (!description.trim()) newErrors.description = 'Description is required.';
+    if (!imageUrl.trim()) newErrors.imageUrl = 'Image URL is required.';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateForm()) return;
+
     const bookData = {
       title,
       author,
@@ -29,7 +46,7 @@ const AddBookForm = ({ closeModal }) => {
 
   return (
     <div className="add-book-form">
-      <h2>Add a New Book</h2>
+      <h2 className="modal-title">Add a New Book</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title:</label>
@@ -39,8 +56,8 @@ const AddBookForm = ({ closeModal }) => {
             name="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            required
           />
+          {errors.title && <p className="error">{errors.title}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="author">Author:</label>
@@ -50,8 +67,8 @@ const AddBookForm = ({ closeModal }) => {
             name="author"
             value={author}
             onChange={(e) => setAuthor(e.target.value)}
-            required
           />
+          {errors.author && <p className="error">{errors.author}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="genre">Genre:</label>
@@ -61,8 +78,8 @@ const AddBookForm = ({ closeModal }) => {
             name="genre"
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
-            required
           />
+          {errors.genre && <p className="error">{errors.genre}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="description">Description:</label>
@@ -72,6 +89,7 @@ const AddBookForm = ({ closeModal }) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           ></textarea>
+          {errors.description && <p className="error">{errors.description}</p>}
         </div>
         <div className="form-group">
           <label htmlFor="image_url">Image URL:</label>
@@ -82,6 +100,7 @@ const AddBookForm = ({ closeModal }) => {
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
           />
+          {errors.imageUrl && <p className="error">{errors.imageUrl}</p>}
         </div>
         <div className="form-buttons">
           <button type="submit" className="submit-button">Add Book</button>

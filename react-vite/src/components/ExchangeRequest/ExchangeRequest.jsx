@@ -13,9 +13,19 @@ const ExchangeRequest = () => {
     dispatch(thunkGetExchangeRequests());
   }, [dispatch]);
 
-  const handleStatusUpdate = (requestId, newStatus) => {
-    dispatch(thunkUpdateExchangeRequest(requestId, newStatus));
+const handleStatusUpdate = (requestId, newStatus) => {
+  const requestData = {
+    status: newStatus,  // Only updating the status for now
   };
+
+  dispatch(thunkUpdateExchangeRequest(requestId, requestData))
+    .then(() => {
+      console.log(`Request ${requestId} updated to ${newStatus}`);
+    })
+    .catch((err) => {
+      console.error("Failed to update request:", err);
+    });
+};
 
   const handleDeleteRequest = (requestId) => {
     // Directly delete the exchange request without confirmation

@@ -1,56 +1,127 @@
-.add-book-form {
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 }
 
+/* Modal Content */
+.modal-content {
+    background-color: rgba(43, 43, 43, 0.95);
+    padding: 25px;
+    border-radius: 8px;
+    width: 400px;
+    color: #EEDFCC;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1001;
+}
+
+/* Close Button */
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #EEDFCC;
+}
+
+.close-button:hover {
+    color: #CBA135;
+}
+
+/* Form Group Styling */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .form-group label {
-    display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    font-size: 15px;
+    color: #EEDFCC;
 }
 
 .form-group input,
 .form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-}
-
-.form-buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.submit-button {
-    padding: 10px 20px;
-    background-color: #9b59b6;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #444444;
+    background-color: #333333;
     color: white;
-    border: none;
+    width: 100%;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #CBA135;
+    outline: none;
+}
+
+/* Modal Title */
+.modal-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #E9967A;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Button Styles */
+.submit-button,
+.cancel-button {
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.3s;
+    width: auto;
+}
+
+/* Submit Button Styles */
+.submit-button {
+    background-color: #CBA135;
+    color: #2F2F2F;
 }
 
 .submit-button:hover {
-    background-color: #8e44ad;
+    background-color: #B8902D;
+    transform: translateY(-2px);
 }
 
+/* Cancel Button Styles */
 .cancel-button {
-    padding: 10px 20px;
-    background-color: #e74c3c;
+    background-color: #E74C3C;
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
 }
 
 .cancel-button:hover {
-    background-color: #c0392b;
+    background-color: #C0392B;
+    transform: translateY(-2px);
+}
+
+/* Form Button Container */
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
 }
