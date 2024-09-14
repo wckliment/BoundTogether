@@ -6,7 +6,7 @@ import { thunkGetReviews } from '../../redux/reviews';
 import BookExchangeRequestModal from '../BookExchangeRequestModal/BookExchangeRequestModal';
 import ReviewModal from '../ReviewModal/ReviewModal';
 import { useModal } from '../../context/Modal';
-import './BookExplorer.css';
+import './BookExplorer.css'; //add comment
 
 const BookExplorer = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const BookExplorer = () => {
 
     setModalContent(
       <ReviewModal
-        book={book}  
+        book={book}
         onClose={() => closeModal()}
       />
     );
