@@ -10,7 +10,7 @@ const BookExchangeRequestModal = ({ book }) => {
   const [dueDate, setDueDate] = useState('');
   const modalRef = useRef();
 
-  // Debugging: log the title of the book when the modal renders
+
   console.log('Rendering Modal for book:', book);
 
   const handleSubmit = async (e) => {
@@ -19,10 +19,10 @@ const BookExchangeRequestModal = ({ book }) => {
     const requestData = {
       book_id: book.id,
       due_date: dueDate,
-      owner_id: book.user_id  // Ensure the owner_id is added here
+      owner_id: book.user_id
     };
 
-    // Debugging: Log the request data to verify that it's correct
+    
     console.log('Submitting exchange request with data:', requestData);
 
     try {

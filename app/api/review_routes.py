@@ -53,7 +53,7 @@ def update_review(id):
 
     db.session.commit()
 
-    # Optionally update the average rating for the book if necessary
+    
     book = Book.query.get(review.book_id)
     total_reviews = len(book.reviews)
     total_rating = sum([review.rating for review in book.reviews])

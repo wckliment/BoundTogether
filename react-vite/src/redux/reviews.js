@@ -46,9 +46,9 @@ export const thunkCreateReview = (bookId, reviewData) => async (dispatch) => {
   });
 
   if (response.ok) {
-    const updatedBook = await response.json();  // The updated book with the new average rating
-    dispatch(addReview(updatedBook.reviews[updatedBook.reviews.length - 1]));  // Add the new review
-    dispatch(updateBook(updatedBook));  // Update the book's average rating in the Redux store
+    const updatedBook = await response.json();
+    dispatch(addReview(updatedBook.reviews[updatedBook.reviews.length - 1]));
+    dispatch(updateBook(updatedBook));
   }
 };
 
@@ -68,7 +68,7 @@ export const thunkUpdateReview = (reviewId, reviewData) => async (dispatch) => {
     const bookResponse = await fetch(`/api/books/${updatedReview.book_id}`);
     if (bookResponse.ok) {
       const updatedBook = await bookResponse.json();
-      dispatch(updateBook(updatedBook)); // Update the book's average rating in the state
+      dispatch(updateBook(updatedBook)); 
     }
   }
 };

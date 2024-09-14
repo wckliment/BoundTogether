@@ -1,26 +1,26 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { thunkCreateReview, thunkUpdateReview } from '../../redux/reviews'; // Import both thunks
-import './ReviewModal.css';  // Assuming you will have some CSS for the stars
+import { thunkCreateReview, thunkUpdateReview } from '../../redux/reviews';
+import './ReviewModal.css';
 
 const ReviewModal = ({ book, onClose, existingReview }) => {
   const dispatch = useDispatch();
-  const [rating, setRating] = useState(existingReview ? existingReview.rating : 0); // Pre-populate if updating
-  const [hoverRating, setHoverRating] = useState(0); // For hover effect
+  const [rating, setRating] = useState(existingReview ? existingReview.rating : 0);
+  const [hoverRating, setHoverRating] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const reviewData = {
       rating,
-      reviewee_id: book.user_id,  // The owner of the book
+      reviewee_id: book.user_id,
     };
 
-    // If an existing review is provided, update it; otherwise, create a new one
+
     if (existingReview) {
-      dispatch(thunkUpdateReview(existingReview.id, reviewData));  // Update review
+      dispatch(thunkUpdateReview(existingReview.id, reviewData));
     } else {
-      dispatch(thunkCreateReview(book.id, reviewData));  // Create new review
+      dispatch(thunkCreateReview(book.id, reviewData));  
     }
 
     onClose();  // Close modal after submission

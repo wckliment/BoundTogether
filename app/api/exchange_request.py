@@ -9,7 +9,7 @@ exchange_request_routes = Blueprint('exchange_requests', __name__)
 @exchange_request_routes.route('/')
 @login_required
 def get_exchange_requests():
-    # Get exchange requests where the current user is either the requester or the owner
+
     requests = ExchangeRequest.query.filter(
         (ExchangeRequest.requester_id == current_user.id) |
         (ExchangeRequest.owner_id == current_user.id)
@@ -27,7 +27,7 @@ def update_exchange_request(id):
     if not exchange_request:
         return jsonify({"error": "Exchange request not found"}), 404
 
-    # Only the owner of the book can update the request status
+
     if exchange_request.owner_id != current_user.id:
         return jsonify({"error": "Unauthorized"}), 403
 
@@ -37,18 +37,18 @@ def update_exchange_request(id):
         new_status = data['status']
         exchange_request.status = new_status
 
-        # Update the book's availability based on status
+
         if new_status == 'accepted':
-            book = exchange_request.book  # Assuming the relationship exists
-            book.status = 'borrowed'  # Update the book's status in the Book model
+            book = exchange_request.book
+            book.status = 'borrowed'
         elif new_status == 'completed':
             book = exchange_request.book
-            book.status = 'not available'  # The book is now marked as not available
+            book.status = 'not available'
         elif new_status == 'rejected':
             book = exchange_request.book
-            book.status = 'available'  # If the exchange is rejected, the book stays available
+            book.status = 'available'
 
-        db.session.commit()  # Commit the updated exchange request status and book status
+        db.session.commit()
         return exchange_request.to_dict()
 
     return jsonify({"error": "Invalid request data"}), 400
@@ -61,9 +61,9 @@ def update_exchange_request(id):
 def create_exchange_request():
     try:
         data = request.json
-        print("Received data:", data)  # Debug incoming request data
+        print("Received data:", data)
 
-        # Convert the due_date string to a Python date object
+
         due_date = datetime.strptime(data['due_date'], '%Y-%m-%d').date() if data.get('due_date') else None
 
         new_request = ExchangeRequest(
@@ -71,7 +71,7 @@ def create_exchange_request():
             owner_id=data['owner_id'],
             book_id=data['book_id'],
             status='pending',
-            due_date=due_date  # Save the converted due_date
+            due_date=due_date
         )
 
         db.session.add(new_request)
@@ -79,7 +79,7 @@ def create_exchange_request():
 
         return new_request.to_dict(), 201
     except Exception as e:
-        print("Error creating exchange request:", str(e))  # Log the error
+        print("Error creating exchange request:", str(e))  
         return jsonify({"error": str(e)}), 500
 
 

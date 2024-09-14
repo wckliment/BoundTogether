@@ -18,7 +18,7 @@ def seed_exchange_requests():
         book_id=4,
         status="accepted",
         request_date=datetime.now(),
-        due_date=datetime.now() + timedelta(days=7) # due in 7 days
+        due_date=datetime.now() + timedelta(days=7)
     )
 
     request3 = ExchangeRequest(
@@ -27,7 +27,7 @@ def seed_exchange_requests():
         book_id=2,
         status="rejected",
         request_date=datetime.now(),
-        due_date=None  # no due date for rejected requests
+        due_date=None
     )
 
     request4 = ExchangeRequest(
@@ -36,7 +36,7 @@ def seed_exchange_requests():
         book_id=6,
         status="pending",
         request_date=datetime.now(),
-        due_date=datetime.now() + timedelta(days=21) # due in 21 days
+        due_date=datetime.now() + timedelta(days=21)
     )
 
     request5 = ExchangeRequest(
@@ -45,7 +45,7 @@ def seed_exchange_requests():
         book_id=7,
         status="completed",
         request_date=datetime.now(),
-        due_date=datetime.now() + timedelta(days=30) # due in 30 days
+        due_date=datetime.now() + timedelta(days=30)
     )
 
     # Add all the requests to the session
@@ -55,7 +55,7 @@ def seed_exchange_requests():
     db.session.add(request4)
     db.session.add(request5)
 
-    # Commit the changes
+
     db.session.commit()
 
 def undo_exchange_requests():

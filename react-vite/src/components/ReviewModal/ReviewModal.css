@@ -20,7 +20,7 @@
     color: gray;
 }
 
-/* Modal Button Styles */
+
 .submit-button,
 .cancel-button {
     padding: 10px 20px;
@@ -31,52 +31,52 @@
     border: none;
     transition: background-color 0.3s ease, transform 0.3s;
     width: auto;
-    /* Set width to auto so the button size adapts to content */
+
 }
 
-/* Submit Button */
+
 .submit-button {
     background-color: #CBA135;
-    /* Muted gold */
+
     color: #2F2F2F;
-    /* Dark gray text */
+
 }
 
 .submit-button:hover {
     background-color: #B8902D;
-    /* Darker gold on hover */
+
     transform: translateY(-2px);
-    /* Lift effect */
+
 }
 
 .submit-button:disabled {
     background-color: #888888;
-    /* Gray background when disabled */
+
     color: white;
-    /* White text when disabled */
+
     cursor: not-allowed;
-    /* Not-allowed cursor when disabled */
+
 }
 
 /* Cancel Button */
 .cancel-button {
     background-color: #E74C3C;
-    /* Soft red */
+
     color: white;
 }
 
 .cancel-button:hover {
     background-color: #C0392B;
-    /* Darker red on hover */
+
     transform: translateY(-2px);
-    /* Lift effect */
+
 }
 
-/* Button Container */
+
 .form-buttons {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
     gap: 10px;
-    /* Space between buttons */
+    
 }

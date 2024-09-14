@@ -6,7 +6,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    /* Darker overlay for consistency */
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,19 +16,19 @@
 /* Modal Content */
 .modal-content {
     background-color: rgba(43, 43, 43, 0.95);
-    /* Dark translucent background */
+
     padding: 25px;
     border-radius: 10px;
     position: relative;
     width: 400px;
     color: #EEDFCC;
-    /* Light beige text for consistency */
+
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    /* Shadow for depth */
+
     font-family: 'Poppins', sans-serif;
 }
 
-/* Modal Header */
+
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -36,17 +36,17 @@
     margin-bottom: 20px;
 }
 
-/* Modal Title */
+
 .modal-title {
     font-size: 22px;
     font-weight: bold;
     color: #E9967A !important;
-    /* Soft salmon color for the title */
+
     margin: 0;
     text-transform: uppercase;
 }
 
-/* Close Button */
+
 .close-button {
     background: none;
     border: none;
@@ -57,10 +57,10 @@
 
 .close-button:hover {
     color: #CBA135;
-    /* Muted gold on hover */
+
 }
 
-/* Modal Actions (Buttons) */
+
 .modal-actions {
     display: flex;
     justify-content: space-between;
@@ -68,12 +68,12 @@
     gap: 15px;
 }
 
-/* Submit Button */
+
 .submit-button {
     background-color: #CBA135;
-    /* Muted gold */
+
     color: #2F2F2F;
-    /* Dark gray text */
+
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
@@ -86,15 +86,15 @@
 
 .submit-button:hover {
     background-color: #B8902D;
-    /* Darker gold on hover */
+
     transform: translateY(-2px);
-    /* Lift effect */
+
 }
 
-/* Cancel Button */
+
 .cancel-button {
     background-color: #E74C3C;
-    /* Soft red */
+
     color: white;
     padding: 10px 20px;
     border: none;
@@ -108,7 +108,7 @@
 
 .cancel-button:hover {
     background-color: #C0392B;
-    /* Darker red on hover */
+
     transform: translateY(-2px);
-    /* Lift effect */
+    
 }

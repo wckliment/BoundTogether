@@ -1,4 +1,4 @@
-/* Modal Overlay */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -12,7 +12,7 @@
     z-index: 1000;
 }
 
-/* Modal Content */
+
 .modal-content {
     background-color: rgba(43, 43, 43, 0.95);
     padding: 25px;
@@ -26,7 +26,7 @@
     z-index: 1001;
 }
 
-/* Close Button */
+
 .close-button {
     position: absolute;
     top: 10px;
@@ -83,7 +83,7 @@
     text-align: center;
 }
 
-/* Button Styles */
+
 .submit-button,
 .cancel-button {
     padding: 10px 20px;
@@ -96,7 +96,7 @@
     width: auto;
 }
 
-/* Submit Button Styles */
+
 .submit-button {
     background-color: #CBA135;
     color: #2F2F2F;
@@ -107,7 +107,7 @@
     transform: translateY(-2px);
 }
 
-/* Cancel Button Styles */
+
 .cancel-button {
     background-color: #E74C3C;
     color: white;
@@ -118,7 +118,7 @@
     transform: translateY(-2px);
 }
 
-/* Form Button Container */
+
 .form-buttons {
     display: flex;
     justify-content: space-between;

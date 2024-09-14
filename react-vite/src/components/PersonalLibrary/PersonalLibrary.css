@@ -1,27 +1,27 @@
-/* Layout for the personal library page */
+
 .personal-library-layout {
     display: flex;
     gap: 0;
     min-height: 100vh;
-    /* Ensure the layout takes up the full viewport height */
+
 }
 
-/* Apply the same background as the splash page */
+
 .personal-library-container {
     flex-grow: 1;
     padding: 200px;
     background: linear-gradient(rgba(43, 43, 43, 0.8), rgba(43, 43, 43, 0.8)), url('https://imgs.search.brave.com/Bi4KGJkcS6Fxd2mo4tweFMJTRN3nwm89Gz_JX7AD4ak/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzAzLzg3LzE1Lzc5/LzM2MF9GXzM4NzE1/Nzk2Nl90UmphcFY3/bHlrQmRPU01Icklm/cllETDVBcEhqaGtG/Ui5qcGc') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
-    /* Ensures the container takes the full viewport height */
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    /* Centers content horizontally */
+
 }
 
-/* Header container styling */
+
 .header-container {
     text-align: center;
     margin-bottom: 10px;
@@ -29,10 +29,10 @@
     padding-top: 0;
     position: relative;
     top: -20px;
-    /* Add more spacing below the header */
+
 }
 
-/* Title styling similar to the splash page */
+
 .header-container h1 {
     font-size: 64px;
     font-weight: 700;
@@ -43,7 +43,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Styling for the "Add Book" button similar to splash page buttons */
+
 .add-book-button {
     margin-top: 10px;
     display: block;
@@ -51,9 +51,9 @@
     margin-right: auto;
     padding: 18px 35px;
     background-color: #CBA135;
-    /* Muted Gold */
+
     color: #2F2F2F;
-    /* Dark Gray Text */
+
     border: none;
     border-radius: 5px;
     font-size: 18px;
@@ -65,11 +65,11 @@
 
 .add-book-button:hover {
     background-color: #E9967A;
-    /* Soft Salmon hover */
+
     transform: scale(1.05);
 }
 
-/* Flexbox layout for the list of book tiles */
+
 .books-list {
     display: flex;
     flex-wrap: wrap;
@@ -78,10 +78,10 @@
     align-items: flex-start;
     margin-top: 80px;
     width: 100%;
-    /* Ensure the books-list spans full width */
+
 }
 
-/* Message when there are no books */
+
 .empty-library-message {
     text-align: center;
     margin-top: 50px;
@@ -90,12 +90,12 @@
     font-weight: bold;
 }
 
-/* Individual book tile styling */
+
 .book-tile {
     background-color: rgba(51, 51, 51, 0.9);
-    /* Dark translucent background */
+
     color: #EEDFCC;
-    /* Light beige text */
+
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -113,7 +113,7 @@
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Image styling within the book tile */
+
 .book-image {
     max-width: 100%;
     height: auto;
@@ -124,21 +124,21 @@
     flex-grow: 1;
 }
 
-/* Styling for the book details text */
+
 .book-details {
     margin-bottom: 15px;
     color: #EEDFCC;
-    /* Light Beige text */
+
 }
 
-/* Flexbox layout for action buttons within the book tile */
+
 .book-actions {
     display: flex;
     justify-content: space-between;
     margin-top: auto;
 }
 
-/* Common button styles for edit and delete buttons */
+
 .edit-button,
 .delete-button {
     padding: 8px 12px;
@@ -149,10 +149,10 @@
     transition: background-color 0.3s;
 }
 
-/* Edit button specific styling */
+
 .edit-button {
     background-color: #CBA135;
-    /* Muted Gold for Edit button */
+
     color: #2F2F2F;
     padding: 12px 20px;
     border: none;
@@ -165,13 +165,13 @@
 
 .edit-button:hover {
     background-color: #B8902D;
-    /* Slightly darker gold on hover */
+
 }
 
-/* Delete button styling (soft red) */
+
 .delete-button {
     background-color: #E74C3C;
-    /* Soft red for Delete button */
+
     color: #2F2F2F;
     padding: 12px 20px;
     border: none;
@@ -184,10 +184,10 @@
 
 .delete-button:hover {
     background-color: #C0392B;
-    /* Darker red on hover */
+
 }
 
-/* Modal-specific styling */
+
 .delete-confirmation-modal {
     text-align: center;
     padding: 20px;

@@ -15,7 +15,7 @@ function LoginFormModal() {
 
   const modalRef = useRef();
 
-  // Custom validation logic
+
   const validateForm = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -29,16 +29,16 @@ function LoginFormModal() {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Return true if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Perform custom validation
+
     if (!validateForm()) return;
 
-    // If validation passes, make the login request
+    
     const serverResponse = await dispatch(
       thunkLogin({
         email,

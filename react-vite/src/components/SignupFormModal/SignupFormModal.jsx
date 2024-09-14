@@ -36,16 +36,16 @@ function SignupFormModal() {
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0; // Return true if no errors
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Perform client-side validation
+
     if (!validateForm()) return;
 
-    // If validation passes, make the signup request
+
     const serverResponse = await dispatch(
       thunkSignup({
         email,
@@ -54,7 +54,7 @@ function SignupFormModal() {
       })
     );
 
-    // Handle server-side errors
+    
     if (serverResponse) {
       setErrors(serverResponse);
     } else {

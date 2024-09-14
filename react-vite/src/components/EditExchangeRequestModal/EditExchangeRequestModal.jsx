@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { thunkUpdateExchangeRequest } from '../../redux/exchangeRequests'; // Import the update thunk
+import { thunkUpdateExchangeRequest } from '../../redux/exchangeRequests'; 
 
 const EditExchangeRequestModal = ({ request, onClose }) => {
   const dispatch = useDispatch();
@@ -11,11 +11,11 @@ const EditExchangeRequestModal = ({ request, onClose }) => {
     e.preventDefault();
     const updatedRequestData = {
       status,
-      due_date: dueDate, // Include the updated due date if available
+      due_date: dueDate,
     };
 
     dispatch(thunkUpdateExchangeRequest(request.id, updatedRequestData));
-    onClose(); // Close the modal after submission
+    onClose();
   };
 
   return (

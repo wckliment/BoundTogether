@@ -104,15 +104,15 @@ def explore_books():
     """
     Get all books except those that belong to the current user, including the book owner's information.
     """
-    # Query to get all books that do not belong to the current user
+
     other_books = Book.query.filter(Book.user_id != current_user.id).all()
 
-    # Prepare book data including the book owner (user who owns the book)
+
     books_with_owner = []
     for book in other_books:
         book_data = book.to_dict()
-        owner = User.query.get(book.user_id)  # Fetch the book owner
-        book_data['owner'] = owner.username  # Add owner's username to book data
+        owner = User.query.get(book.user_id)
+        book_data['owner'] = owner.username  
         books_with_owner.append(book_data)
 
     return jsonify(books_with_owner)

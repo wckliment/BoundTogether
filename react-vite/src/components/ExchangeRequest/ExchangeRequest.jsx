@@ -15,7 +15,7 @@ const ExchangeRequest = () => {
 
 const handleStatusUpdate = (requestId, newStatus) => {
   const requestData = {
-    status: newStatus,  // Only updating the status for now
+    status: newStatus,
   };
 
   dispatch(thunkUpdateExchangeRequest(requestId, requestData))
@@ -28,7 +28,7 @@ const handleStatusUpdate = (requestId, newStatus) => {
 };
 
   const handleDeleteRequest = (requestId) => {
-    // Directly delete the exchange request without confirmation
+    
     dispatch(thunkDeleteExchangeRequest(requestId));
   };
 

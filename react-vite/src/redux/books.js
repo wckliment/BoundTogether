@@ -2,7 +2,7 @@ const SET_BOOKS = 'books/SET_BOOKS';
 const ADD_BOOK = 'books/ADD_BOOK';
 const EDIT_BOOK = 'books/EDIT_BOOK';
 const DELETE_BOOK = 'books/DELETE_BOOK';
-const UPDATE_BOOK_STATUS = 'books/UPDATE_BOOK_STATUS'; // New action type for updating book status
+const UPDATE_BOOK_STATUS = 'books/UPDATE_BOOK_STATUS';
 const UPDATE_BOOK = 'books/UPDATE_BOOK';
 
 // Action creators
@@ -26,20 +26,20 @@ export const deleteBook = (bookId) => ({
   bookId,
 });
 
-// New action for updating the status of a book
+
 export const updateBookStatus = (bookId, status) => ({
   type: UPDATE_BOOK_STATUS,
   bookId,
   status,
 });
 
-// Action creator for updating a book
+
 export const updateBook = (book) => ({
   type: UPDATE_BOOK,
   book,
 });
 
-// Thunk action for getting books
+
 export const thunkGetBooks = () => async (dispatch) => {
   const response = await fetch('/api/books/user');
   if (response.ok) {
@@ -61,7 +61,7 @@ export const thunkAddBook = (bookData) => async (dispatch) => {
 
     if (response.ok) {
       const newBook = await response.json();
-      dispatch(addBook(newBook));  // Dispatch the addBook action with the new book
+      dispatch(addBook(newBook));  
       return newBook;
     } else {
       const errorData = await response.json();

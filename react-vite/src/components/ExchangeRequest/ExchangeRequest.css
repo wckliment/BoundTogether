@@ -1,4 +1,4 @@
-/* Exchange Request Page Layout */
+
 .exchange-request-page {
     display: flex;
     gap: 0;
@@ -7,7 +7,7 @@
     background-size: cover;
 }
 
-/* Left Nav Styling */
+
 .left-nav {
     width: 250px;
     background-color: #333;
@@ -23,7 +23,7 @@
     justify-content: flex-start;
 }
 
-/* Content Section Styling */
+
 .content-section {
     margin-left: 250px;
     padding: 20px;
@@ -35,7 +35,7 @@
     margin: 0 auto;
 }
 
-/* Header Styling */
+
 .content-section h1 {
     font-size: 64px;
     font-weight: 700;
@@ -47,7 +47,7 @@
     margin-bottom: 40px;
 }
 
-/* Exchange Requests List */
+
 .exchange-requests-list {
     display: flex;
     flex-direction: column;
@@ -57,22 +57,22 @@
     justify-content: flex-start;
 }
 
-/* Individual Exchange Request Tile */
+
 .exchange-request-tile {
     padding: 25px;
     background-color: rgba(51, 51, 51, 0.9);
-    /* Dark translucent background */
+
     color: #EEDFCC;
-    /* Light beige text */
+
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border: none;
     width: 100%;
-    /* Let the tile take the full width of the container */
+
     max-width: 1000px;
-    /* Set a max-width for the tile */
+
     margin: 0 auto;
-    /* Center the tile */
+
     text-transform: capitalize;
 }
 
@@ -90,7 +90,7 @@
     text-transform: capitalize;
 }
 
-/* Actions Styling */
+
 .actions {
     display: flex;
     gap: 10px;
@@ -98,7 +98,7 @@
     justify-content: center;
 }
 
-/* Common Button Styles */
+
 button {
     padding: 10px 15px;
     border: none;
@@ -118,7 +118,7 @@ button:focus {
     outline: none;
 }
 
-/* Accept Button */
+
 button.accept {
     background-color: #CBA135;
     color: #2F2F2F;
@@ -128,7 +128,7 @@ button.accept:hover {
     background-color: #B8902D;
 }
 
-/* Reject Button */
+
 button.reject {
     background-color: #E74C3C;
     color: white;
@@ -138,19 +138,19 @@ button.reject:hover {
     background-color: #C0392B;
 }
 
-/* Completed Button */
+
 button.completed {
     background-color: #CBA135;
-    /* Muted gold */
+
     color: #2F2F2F;
 }
 
 button.completed:hover {
     background-color: #B8902D;
-    /* Darker gold on hover */
+
 }
 
-/* Delete Button */
+
 button.delete {
     background-color: #dc3545;
     color: white;

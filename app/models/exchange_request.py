@@ -27,19 +27,19 @@ class ExchangeRequest(db.Model):
         'requester': {
             'id': self.requester.id,
             'username': self.requester.username,
-            # Add other necessary fields like email, etc., but avoid nested fields
+
         },
         'owner': {
             'id': self.owner.id,
             'username': self.owner.username,
-            # Add other necessary fields for the owner
+
         },
         'book': {
             'id': self.book.id,
             'title': self.book.title,
             'author': self.book.author,
             'genre': self.book.genre,
-            'image_url': self.book.image_url,  # If you have an image for the book
+            'image_url': self.book.image_url,  
         },
         'request_date': self.request_date,
         'due_date': self.due_date,

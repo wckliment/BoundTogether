@@ -13,7 +13,7 @@ const SubmitReviewForm = ({ bookId, revieweeId }) => {
     const reviewData = {
       rating,
       comment,
-      reviewee_id: revieweeId, // The owner of the book
+      reviewee_id: revieweeId, 
     };
 
     dispatch(thunkCreateReview(bookId, reviewData));

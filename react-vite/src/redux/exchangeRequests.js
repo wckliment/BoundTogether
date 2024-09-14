@@ -15,7 +15,7 @@ export const updateExchangeRequest = (request) => ({
 });
 
 export const addExchangeRequest = (request) => ({
-  type: ADD_EXCHANGE_REQUEST, // New action creator for adding a new request
+  type: ADD_EXCHANGE_REQUEST,
   request,
 });
 
@@ -55,21 +55,21 @@ export const thunkUpdateExchangeRequest = (requestId, requestData) => async (dis
 // Thunk action for creating a new exchange request
 export const thunkCreateExchangeRequest = (requestData) => async (dispatch) => {
   try {
-    const response = await fetch('/api/exchange-requests/', { // This calls the backend route
+    const response = await fetch('/api/exchange-requests/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestData), // Ensure that requestData contains all necessary fields
+      body: JSON.stringify(requestData),
     });
 
     if (response.ok) {
       const newRequest = await response.json();
-      dispatch(addExchangeRequest(newRequest));  // Update Redux state (optional)
+      dispatch(addExchangeRequest(newRequest));
       return newRequest;
     } else {
       const errorData = await response.json();
-      console.error('Failed to create exchange request:', errorData); // Log the error
+      console.error('Failed to create exchange request:', errorData);
       return Promise.reject(errorData);
     }
   } catch (error) {
@@ -84,7 +84,7 @@ export const thunkDeleteExchangeRequest = (requestId) => async (dispatch) => {
   });
 
   if (response.ok) {
-    dispatch(deleteExchangeRequest(requestId)); // Update Redux store
+    dispatch(deleteExchangeRequest(requestId));
   } else {
     const error = await response.json();
     console.error('Failed to delete exchange request:', error);
@@ -106,16 +106,16 @@ export default function exchangeRequestsReducer(state = initialState, action) {
           req.id === action.request.id ? action.request : req
         ),
       };
-    case ADD_EXCHANGE_REQUEST: // Handle adding the new request
+    case ADD_EXCHANGE_REQUEST:
       return {
         ...state,
-        exchangeRequests: [...state.exchangeRequests, action.request], // Add new request to the state
+        exchangeRequests: [...state.exchangeRequests, action.request],
       };
-    case DELETE_EXCHANGE_REQUEST: // Handle deleting the request
+    case DELETE_EXCHANGE_REQUEST:
       return {
         ...state,
         exchangeRequests: state.exchangeRequests.filter(
-          (req) => req.id !== action.requestId // Remove the deleted request from the state
+          (req) => req.id !== action.requestId 
         ),
       };
     default:

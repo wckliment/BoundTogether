@@ -2,24 +2,24 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LeftNav from '../LeftNav/LeftNav';
 import { thunkExploreBooks } from '../../redux/books';
-import { thunkGetReviews } from '../../redux/reviews'; // Import the review thunk
+import { thunkGetReviews } from '../../redux/reviews';
 import BookExchangeRequestModal from '../BookExchangeRequestModal/BookExchangeRequestModal';
-import ReviewModal from '../ReviewModal/ReviewModal'; // Import the review modal
+import ReviewModal from '../ReviewModal/ReviewModal';
 import { useModal } from '../../context/Modal';
 import './BookExplorer.css';
 
 const BookExplorer = () => {
   const dispatch = useDispatch();
-  const books = useSelector((state) => state.books.userBooks); // Select books from Redux store
+  const books = useSelector((state) => state.books.userBooks);
   const { setModalContent, closeModal } = useModal();
 
   useEffect(() => {
-    dispatch(thunkExploreBooks()); // Fetch the books on mount
+    dispatch(thunkExploreBooks());
   }, [dispatch]);
 
-  // Use this effect to log updates to the books array
+
   useEffect(() => {
-    console.log('Books updated:', books);  // This will log when the `books` state updates
+    console.log('Books updated:', books);
   }, [books]);
 
   const handleExchangeRequest = (book) => {
@@ -32,12 +32,12 @@ const BookExplorer = () => {
   };
 
   const handleLeaveReview = (book) => {
-    // Fetch reviews for the book before showing the modal
+
     dispatch(thunkGetReviews(book.id));
 
     setModalContent(
       <ReviewModal
-        book={book}  // Pass book details to ReviewModal
+        book={book}  
         onClose={() => closeModal()}
       />
     );
