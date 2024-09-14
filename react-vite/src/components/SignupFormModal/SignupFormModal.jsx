@@ -74,14 +74,13 @@ function SignupFormModal() {
         <button className="close-button" onClick={closeModal}>X</button>
         <h1>Sign Up</h1>
         {errors.server && <p className="error">{errors.server}</p>}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <div className="form-group">
             <label>Email</label>
             <input
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
             {errors.email && <p className="error">{errors.email}</p>}
           </div>
@@ -91,7 +90,6 @@ function SignupFormModal() {
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              required
             />
             {errors.username && <p className="error">{errors.username}</p>}
           </div>
@@ -101,7 +99,6 @@ function SignupFormModal() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
             {errors.password && <p className="error">{errors.password}</p>}
           </div>
@@ -111,7 +108,6 @@ function SignupFormModal() {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              required
             />
             {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
           </div>

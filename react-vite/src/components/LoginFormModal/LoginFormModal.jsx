@@ -1,13 +1,13 @@
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import { thunkLogin } from "../../redux/session";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Initialize navigate function
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -15,9 +15,30 @@ function LoginFormModal() {
 
   const modalRef = useRef();
 
+  // Custom validation logic
+  const validateForm = () => {
+    const newErrors = {};
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+
+    if (password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Return true if no errors
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Perform custom validation
+    if (!validateForm()) return;
+
+    // If validation passes, make the login request
     const serverResponse = await dispatch(
       thunkLogin({
         email,
@@ -29,7 +50,7 @@ function LoginFormModal() {
       setErrors(serverResponse);
     } else {
       closeModal();
-      navigate('/library'); 
+      navigate('/library');
     }
   };
 
@@ -44,14 +65,13 @@ function LoginFormModal() {
       <div className="modal-content" ref={modalRef}>
         <button className="close-button" onClick={closeModal}>X</button>
         <h1>Log In</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate> {/* Disable browser validation */}
           <div className="form-group">
             <label>Email</label>
             <input
               type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
             />
             {errors.email && <p className="error">{errors.email}</p>}
           </div>
@@ -61,7 +81,6 @@ function LoginFormModal() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
             />
             {errors.password && <p className="error">{errors.password}</p>}
           </div>
