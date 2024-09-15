@@ -67,11 +67,11 @@ def delete_book(id):
         if book.user_id != current_user.id:
             return jsonify({"error": "Unauthorized"}), 403
 
-        # Check if there are any exchange requests associated with the book
+        
         active_requests = ExchangeRequest.query.filter(ExchangeRequest.book_id == id).all()
 
         if active_requests:
-            # Prevent deletion if there are any exchange requests
+
             return jsonify({"error": "Cannot delete a book with existing exchange requests."}), 400
 
         db.session.delete(book)

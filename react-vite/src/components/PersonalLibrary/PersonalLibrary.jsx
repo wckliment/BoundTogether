@@ -5,7 +5,7 @@ import LeftNav from '../LeftNav/LeftNav';
 import AddBookForm from '../AddBookForm/AddBookForm';
 import EditBookForm from '../EditBookForm/EditBookForm';
 import { useModal } from '../../context/Modal';
-import './PersonalLibrary.css'; //comment
+import './PersonalLibrary.css'; //add comment
 
 const PersonalLibrary = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const PersonalLibrary = () => {
     })
     .catch(err => {
       if (err.message.includes('existing exchange requests')) {
-        // Display an error modal if the book has exchange requests
+        
         setModalContent(
           <div>
             <h2>Cannot Delete Book</h2>
