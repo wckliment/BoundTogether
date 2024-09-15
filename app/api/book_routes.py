@@ -59,26 +59,27 @@ def update_book(id):
 @login_required
 def delete_book(id):
     """
-    Delete a specific book from the user's library.
+    Prevents the deletion of a book if there are any associated exchange requests.
     """
-    book = Book.query.get_or_404(id)
+    try:
+        book = Book.query.get_or_404(id)
 
-    if book.user_id != current_user.id:
-        return jsonify({"error": "Unauthorized"}), 403
+        if book.user_id != current_user.id:
+            return jsonify({"error": "Unauthorized"}), 403
 
-     # Check if there are any active exchange requests for this book
-    active_requests = ExchangeRequest.query.filter_by(book_id=book.id).filter(
-        ExchangeRequest.status.in_(['pending', 'accepted'])
-    ).all()
+        # Check if there are any exchange requests associated with the book
+        active_requests = ExchangeRequest.query.filter(ExchangeRequest.book_id == id).all()
 
-    # If there are active exchange requests, prevent the deletion
-    if active_requests:
-        return jsonify({"error": "Cannot delete a book with active exchange requests."}), 400
+        if active_requests:
+            # Prevent deletion if there are any exchange requests
+            return jsonify({"error": "Cannot delete a book with existing exchange requests."}), 400
 
-    # If no active requests, proceed with deletion
-    db.session.delete(book)
-    db.session.commit()
-    return jsonify({"message": "Book deleted successfully"}), 200
+        db.session.delete(book)
+        db.session.commit()
+        return jsonify({"message": "Book deleted successfully"}), 200
+    except Exception as e:
+        print(f"Error deleting book with id {id}: {e}")
+        return jsonify({"error": "An error occurred while deleting the book"}), 500
 
 @book_routes.route('/<int:id>', methods=['GET'])
 @login_required

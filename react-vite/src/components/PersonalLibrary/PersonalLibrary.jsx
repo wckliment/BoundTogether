@@ -24,18 +24,19 @@ const PersonalLibrary = () => {
     setModalContent(<EditBookForm book={book} closeModal={closeModal} />);
   };
 
-  const handleDelete = (bookId) => {
+ const handleDelete = (bookId) => {
   dispatch(thunkDeleteBook(bookId))
     .then(() => {
       dispatch(thunkGetBooks());
       closeModal();
     })
     .catch(err => {
-      if (err.message.includes('active exchange requests')) {
+      if (err.message.includes('existing exchange requests')) {
+        // Display an error modal if the book has exchange requests
         setModalContent(
           <div>
             <h2>Cannot Delete Book</h2>
-            <p>This book has active exchange requests and cannot be deleted.</p>
+            <p>This book has exchange requests associated with it and cannot be deleted.</p>
             <button onClick={closeModal} className="confirm-button">Okay</button>
           </div>
         );

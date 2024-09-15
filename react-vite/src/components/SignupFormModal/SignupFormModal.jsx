@@ -1,11 +1,13 @@
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css"; //adding a comment
 
 function SignupFormModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -54,11 +56,12 @@ function SignupFormModal() {
       })
     );
 
-    
+
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
       closeModal();
+      navigate("/library");
     }
   };
 
