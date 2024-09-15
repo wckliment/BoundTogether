@@ -25,24 +25,36 @@ const PersonalLibrary = () => {
   };
 
   const handleDelete = (bookId) => {
-    dispatch(thunkDeleteBook(bookId))
-      .then(() => {
-        dispatch(thunkGetBooks());
-        closeModal();
-      })
-      .catch(err => console.error("Failed to delete book:", err));
-  };
+  dispatch(thunkDeleteBook(bookId))
+    .then(() => {
+      dispatch(thunkGetBooks());
+      closeModal();
+    })
+    .catch(err => {
+      if (err.message.includes('active exchange requests')) {
+        setModalContent(
+          <div>
+            <h2>Cannot Delete Book</h2>
+            <p>This book has active exchange requests and cannot be deleted.</p>
+            <button onClick={closeModal} className="confirm-button">Okay</button>
+          </div>
+        );
+      } else {
+        console.error("Failed to delete book:", err);
+      }
+    });
+};
 
-  const openDeleteConfirmationModal = (bookId) => {
-    setModalContent(
-      <div>
-        <h2>Confirm Deletion</h2>
-        <p>Are you sure you want to delete this book?</p>
-        <button onClick={() => handleDelete(bookId)} className="confirm-button">Yes, delete</button>
-        <button onClick={closeModal} className="cancel-button">Cancel</button>
-      </div>
-    );
-  };
+const openDeleteConfirmationModal = (bookId) => {
+  setModalContent(
+    <div>
+      <h2>Confirm Deletion</h2>
+      <p>Are you sure you want to delete this book?</p>
+      <button onClick={() => handleDelete(bookId)} className="confirm-button">Yes, delete</button>
+      <button onClick={closeModal} className="cancel-button">Cancel</button>
+    </div>
+  );
+};
 
   return (
     <div className="personal-library-layout">

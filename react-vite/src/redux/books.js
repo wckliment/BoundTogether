@@ -61,7 +61,7 @@ export const thunkAddBook = (bookData) => async (dispatch) => {
 
     if (response.ok) {
       const newBook = await response.json();
-      dispatch(addBook(newBook));  
+      dispatch(addBook(newBook));
       return newBook;
     } else {
       const errorData = await response.json();
@@ -80,13 +80,14 @@ export const thunkDeleteBook = (bookId) => async (dispatch) => {
     });
 
     if (response.ok) {
-      dispatch(deleteBook(bookId));  // Dispatch the delete action
-      return Promise.resolve();  // Resolve the promise
+      dispatch(deleteBook(bookId));
+      return Promise.resolve();
     } else {
-      return Promise.reject('Failed to delete book');
+      const errorData = await response.json();
+      return Promise.reject(new Error(errorData.error));
     }
   } catch (error) {
-    return Promise.reject(error);  // Reject the promise with error
+    return Promise.reject(error);
   }
 };
 

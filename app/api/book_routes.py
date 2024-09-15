@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Book, User, db
+from app.models import Book, User, db, ExchangeRequest
 
 book_routes = Blueprint('books', __name__)
 
@@ -66,6 +66,16 @@ def delete_book(id):
     if book.user_id != current_user.id:
         return jsonify({"error": "Unauthorized"}), 403
 
+     # Check if there are any active exchange requests for this book
+    active_requests = ExchangeRequest.query.filter_by(book_id=book.id).filter(
+        ExchangeRequest.status.in_(['pending', 'accepted'])
+    ).all()
+
+    # If there are active exchange requests, prevent the deletion
+    if active_requests:
+        return jsonify({"error": "Cannot delete a book with active exchange requests."}), 400
+
+    # If no active requests, proceed with deletion
     db.session.delete(book)
     db.session.commit()
     return jsonify({"message": "Book deleted successfully"}), 200
@@ -112,7 +122,7 @@ def explore_books():
     for book in other_books:
         book_data = book.to_dict()
         owner = User.query.get(book.user_id)
-        book_data['owner'] = owner.username  
+        book_data['owner'] = owner.username
         books_with_owner.append(book_data)
 
     return jsonify(books_with_owner)
